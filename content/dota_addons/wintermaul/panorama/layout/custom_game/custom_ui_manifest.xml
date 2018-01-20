@@ -5,7 +5,7 @@
 			GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_SHOP_SUGGESTEDITEMS, false );
 			GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_QUICKBUY, true ); <!-- Enabled until fixed -->
 			GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_COURIER, false );
-			GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_GAME_NAME, false ); <!-- Disabled until localized-->
+			GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_GAME_NAME, false ); <!-- Disabled until localized-->  
 			GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_MENU_BUTTONS, false );
 			GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, false );
 			GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_HEROES, false );
@@ -18,5 +18,6 @@
 		<CustomUIElement type="Hud"  				layoutfile="file://{resources}/layout/custom_game/selection.xml" />
 		<CustomUIElement type="GameInfo"  			layoutfile="file://{resources}/layout/custom_game/game_info.xml" />
 		<CustomUIElement type="Hud" 			 	layoutfile="file://{resources}/layout/custom_game/test_box.xml" />
+		<CustomUIElement type="Hud" 			 	layoutfile="file://{resources}/layout/custom_game/test_score.xml" />
 	</Panel>
 </root>
