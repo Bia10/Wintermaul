@@ -114,11 +114,7 @@ function CWintermaulGameMode:onNPCSpawn( keys )
 			end
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_crystal_maiden" then
-			print("removing maiden stuff")
-			--enters if-statement but gold gain is still active?
-			spawnedUnit:RemoveAbility("special_bonus_gold_income_20")
-			spawnedUnit:RemoveAbility("special_bonus_unique_crystal_maiden_1")
-			spawnedUnit:RemoveAbility("special_bonus_unique_crystal_maiden_2")
+			spawnedUnit:RemoveAbility("special_bonus_gold_income_15")
 		end
 	end
 end

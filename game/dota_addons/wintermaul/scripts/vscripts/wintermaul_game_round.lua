@@ -193,7 +193,6 @@ function CWintermaulGameRound:End()
 
 		end
 	end
-	
 end
 
 
@@ -259,6 +258,7 @@ function CWintermaulGameRound:OnEntityKilled( event )
 		local playerStats = self._vPlayerStats[ playerID ]
 		if playerStats then
 			playerStats.nCreepsKilled = playerStats.nCreepsKilled + 1
+			--send update to test_scoreboard
 		end
 	end
 
