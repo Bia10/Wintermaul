@@ -1,0 +1,18 @@
+# Cache crap that Valve autogenerates
+*.bin
+
+# Compiled formats
+*.vpcf_c
+*.vtex_c
+*.vsndevts_c
+*.vsnd_c
+*.vmat_c
+*.vjs_c
+*.vxml_c
+*.vcss_c
+
+# Commit panorama compiled textures
+!game/dota_addons/wintermaul/panorama/images/custom_game/*.vtex_c
+
+# Map files
+*.vpk

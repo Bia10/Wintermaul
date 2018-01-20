@@ -1,0 +1,564 @@
+"dota_wintermaul"
+{
+	"PrepTimeBetweenRounds"			"10"
+	"ItemExpireTime"				"10"
+	"RestoreHPAfterRound"			"0"
+	"RestoreMPAfterRound"			"0"
+	"RewardForTowersStanding"		"1"
+	"TowerRewardAmount"				"18"
+	"TowerScalingRewardPerRound"	"2"
+
+	"Spawns"
+	{
+		"1"
+		{
+			"SpawnerName"				"red_spawn_1"
+			"AirWaypoint"				"pc_red"
+			"GroundWaypoint"			"pc_water_left_ground"
+		}
+
+		"2"
+		{
+			"SpawnerName"				"red_spawn_2"
+			"AirWaypoint"				"pc_red"
+			"GroundWaypoint"			"pc_water_left_ground"
+		}
+
+		"3"
+		{
+			"SpawnerName"				"blue_spawn_1"
+			"AirWaypoint"				"pc_blue_1"
+			"GroundWaypoint"			"pc_water_left_ground"
+		}
+
+		"4"
+		{
+			"SpawnerName"				"blue_spawn_2"
+			"AirWaypoint"				"pc_blue_2"
+			"GroundWaypoint"			"pc_water_right_ground"
+		}
+
+		"5"
+		{
+			"SpawnerName"				"teal_spawn_1"
+			"AirWaypoint"				"pc_teal"
+			"GroundWaypoint"			"pc_water_right_ground"
+		}
+
+		"6"
+		{
+			"SpawnerName"				"teal_spawn_2"
+			"AirWaypoint"				"pc_teal"
+			"GroundWaypoint"			"pc_water_right_ground"
+		}
+
+		"7"
+		{
+			"SpawnerName"				"orange_spawn_1"
+			"AirWaypoint"				"pc_orange"
+			"GroundWaypoint"			"pc_water_left_ground"
+		}
+
+		"8"
+		{
+			"SpawnerName"				"orange_spawn_2"
+			"AirWaypoint"				"pc_orange"
+			"GroundWaypoint"			"pc_water_left_ground"
+		}
+
+		"9"
+		{
+			"SpawnerName"				"yellow_spawn_1"
+			"AirWaypoint"				"pc_blue_1"
+			"GroundWaypoint"			"pc_water_left_ground"
+		}
+
+		"10"
+		{
+			"SpawnerName"				"yellow_spawn_2"
+			"AirWaypoint"				"pc_blue_2"
+			"GroundWaypoint"			"pc_water_right_ground"
+		}
+
+		"11"
+		{
+			"SpawnerName"				"purple_spawn_1"
+			"AirWaypoint"				"pc_purple"
+			"GroundWaypoint"			"pc_water_right_ground"
+		}
+
+		"12"
+		{
+			"SpawnerName"				"purple_spawn_2"
+			"AirWaypoint"				"pc_purple"
+			"GroundWaypoint"			"pc_water_right_ground"
+		}
+
+		"13"
+		{
+			"SpawnerName"				"green_spawn_1"
+			"AirWaypoint"				"pc_green_top"
+			"GroundWaypoint"			"path_end"
+		}
+
+		"14"
+		{
+			"SpawnerName"				"green_spawn_2"
+			"AirWaypoint"				"pc_green_top"
+			"GroundWaypoint"			"path_end"
+		}
+
+		"15"
+		{
+			"SpawnerName"				"grey_spawn_1"
+			"AirWaypoint"				"pc_grey"
+			"GroundWaypoint"			"path_end"
+		}
+
+		"16"
+		{
+			"SpawnerName"				"grey_spawn_2"
+			"AirWaypoint"				"pc_grey"
+			"GroundWaypoint"			"path_end"
+		}
+
+		"17"
+		{
+			"SpawnerName"				"pink_spawn_1"
+			"AirWaypoint"				"pc_pink_top"
+			"GroundWaypoint"			"path_end"
+		}
+
+		"18"
+		{
+			"SpawnerName"				"pink_spawn_2"
+			"AirWaypoint"				"pc_pink_top"
+			"GroundWaypoint"			"path_end"
+		}
+
+	}
+
+	"Waves"
+	{
+
+		"Wave1" // Scouts
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Scouts_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Scouts_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Scouts"
+			{
+				"NPCName"					"npc_dota_wintermaul_scouts"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave2" // Engineers
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Engineers_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Engineers_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Engineers"
+			{
+				"NPCName"					"npc_dota_wintermaul_engineers"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave3" // Night Rangers
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Night_Ranger_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Night_Ranger_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Night Rangers"
+			{
+				"NPCName"					"npc_dota_wintermaul_night_ranger"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave4" // Barbarians
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Barbarian_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Barbarians_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Barbarians"
+			{
+				"NPCName"					"npc_dota_wintermaul_barbarians"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave5" // Drakes
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Drake_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Drake_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Air"
+			"Drakes"
+			{
+				"NPCName"					"npc_dota_wintermaul_drake"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave6" // Stalkers
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Stalker_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Stalker_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Evasion"
+			"Stalkers"
+			{
+				"NPCName"					"npc_dota_wintermaul_stalker"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave7" // Water Runners
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Water_Runner_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Water_Runner_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Splitter"
+			"Water Runners"
+			{
+				"NPCName"					"npc_dota_wintermaul_water_runner"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave8" // Angry Spirits
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Angry_Spirit_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Angry_Spirit_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Angry Spirits"
+			{
+				"NPCName"					"npc_dota_wintermaul_angry_spirit"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave9" // Raptor Riders
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Raptor_Rider_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Raptor_Rider_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Haste"
+			"Raptor Riders"
+			{
+				"NPCName"					"npc_dota_wintermaul_raptor_rider"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave10" // Hovercrafts
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Hovercraft_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Hovercraft_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Air"
+			"Hovercrafts"
+			{
+				"NPCName"					"npc_dota_wintermaul_hovercraft"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave11" // Goblin Machines
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Goblin_Machine_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Goblin_Machine_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Goblin Machines"
+			{
+				"NPCName"					"npc_dota_wintermaul_goblin_machine"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave12" // Frosty Reptiles
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Frosty_Reptile_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Frosty_Reptile_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Evasion"
+			"Frosty Reptiles"
+			{
+				"NPCName"					"npc_dota_wintermaul_frosty_reptile"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave13" // Demonic Pets
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Demonic_Pet_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Demonic_Pet_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Demonic Pets"
+			{
+				"NPCName"					"npc_dota_wintermaul_demonic_pets"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave14" // Rock Elementals
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Rock_Elemental_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Rock_Elemental_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Splitter"
+			"Rock Elementals"
+			{
+				"NPCName"					"npc_dota_wintermaul_rock_elemental"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave15" // Young Dragons
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Young_Dragon_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Young_Dragon_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Air"
+			"Young Dragons"
+			{
+				"NPCName"					"npc_dota_wintermaul_young_dragon"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave16" // Eternal Spirits
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Eternal_Spirit_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Eternal_Spirit_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Eternal Spirits"
+			{
+				"NPCName"					"npc_dota_wintermaul_eternal_spirit"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave17" // Angry Ogres
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Angry_Ogre_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Angry_Ogre_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Angry Ogres"
+			{
+				"NPCName"					"npc_dota_wintermaul_angry_ogre"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave18" // Walking Corpses
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Walking_Corpse_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Walking_Corpse_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Evasion"
+			"Walking Corpses"
+			{
+				"NPCName"					"npc_dota_wintermaul_walking_corpse"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave19" // Totem Carriers
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Totem_Carrier_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Totem_Carriers_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Totem Carriers"
+			{
+				"NPCName"					"npc_dota_wintermaul_totem_carriers"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave20" // Bat Peoples
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Bat_People_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Bat_People_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Air"
+			"Bat Peoples"
+			{
+				"NPCName"					"npc_dota_wintermaul_bat_people"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave21" // High Mages
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_High_Mage_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_High_Mage_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Splitter"
+			"High Mages"
+			{
+				"NPCName"					"npc_dota_wintermaul_high_mage"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave22" // Frozen Infernals
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Frozen_Infernal_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Frozen_Infernal_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Frozen Infernals"
+			{
+				"NPCName"					"npc_dota_wintermaul_frozen_infernal"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave23" // Possessed hunters
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Possessed_Hunter_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Possessed_Hunter_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Haste"
+			"Possessed Hunters"
+			{
+				"NPCName"					"npc_dota_wintermaul_possessed_hunter"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave24" // Polar Bears
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Polar_Bear_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Polar_Bear_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Polar Bears"
+			{
+				"NPCName"					"npc_dota_wintermaul_polar_bear"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave25" // Dragons
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Dragon_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Dragon_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Air"
+			"Dragons"
+			{
+				"NPCName"					"npc_dota_wintermaul_dragon"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave26" // Corrupt Chieftains
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Corrupt_Chieftain_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Corrupt_Chieftain_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Boss"
+			"Corrupt Chieftains"
+			{
+				"NPCName"					"npc_dota_wintermaul_corrupt_chieftain"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave27" // Soldiers
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Soldier_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Soldier_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Soldiers"
+			{
+				"NPCName"					"npc_dota_wintermaul_soldier"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave28" // Spider Fiends
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Spider_Fiend_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Spider_Fiend_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Splitter"
+			"Spider Fiends"
+			{
+				"NPCName"					"npc_dota_wintermaul_spider_fiend"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave29" // Armored Wisps
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Armored_Wisp_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Armored_Wisp_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+			"Armored Wisps"
+			{
+				"NPCName"					"npc_dota_wintermaul_armored_wisp"
+				"TotalUnitsToSpawn"			"90"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+
+		"Wave30" // Ancient Dragons
+		{
+			"round_title"				"#DOTA_Wintermaul_Round_Duke_Wintermaul_Title"
+			"round_description"			"#DOTA_Wintermaul_Round_Duke_Wintermaul_Description"
+			"round_special"				"#DOTA_Wintermaul_Round_Element_Boss"
+			"Duke Wintermaul"
+			{
+				"NPCName"					"npc_dota_wintermaul_duke_wintermaul"
+				"TotalUnitsToSpawn"			"1"
+				"UnitsPerSpawn"				"1"
+				"SpawnInterval"				"1"
+			}
+		}
+	}
+}

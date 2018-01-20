@@ -1,0 +1,27 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/game_info.css" />
+    </styles>
+    <Panel class="WintermaulGameInfo">
+        <Panel id="Title">
+            <Label id="TitleName" text="#addonname" />
+        </Panel>
+        <Label id="ObjectiveHeader" class="Header" html="true" text="#wintermaul_game_info_header_objective" />
+        <Label id="BriefDescription" text="#wintermaul_brief_description" />
+
+        <Panel class="InfoRow">
+            <Label id="MadeBy" text="#wintermaul_made_by" />            
+            <DOTAUserName class="AvatarUsername" steamid="76561198020392188" />
+            <DOTAAvatarImage class="AvatarImage" steamid="76561198020392188" />
+            <Label id="And" text="#wintermaul_made_by_and" />
+            <DOTAUserName class="AvatarUsername" steamid="76561198000484217" />
+            <DOTAAvatarImage class="AvatarImage" steamid="76561198000484217" />
+        </Panel>
+
+        <Label id="HowToPlayHeader" class="Header" html="true" text="#wintermaul_game_info_header_how_to_play" />
+        <Label id="ThroneText" html="true" text="#wintermaul_game_info_throne" />
+        <Label id="CoinsText" html="true" text="#wintermaul_game_info_coins" />
+        <Label id="ItemsText" html="true" text="#wintermaul_game_info_items" />
+    </Panel>
+</root>
+

@@ -1,0 +1,100 @@
+.WintermaulGameInfo
+{
+    width:100%;
+    flow-children: down;
+}
+ 
+Label
+{
+    font-size: 18px;
+    color: #999999;
+    vertical-align: top;
+}
+ 
+#Title
+{
+    flow-children: right;
+}
+
+#TitleIcon
+{
+    width: 64px;
+    height: 64px;
+    vertical-align: center;
+}
+
+#TitleName
+{
+    color: #cccccc;
+    font-size: 64px;
+    margin-left: 16px;
+    margin-top: 16px;
+    text-transform: uppercase;
+    vertical-align: center;
+}
+
+#BriefDescription
+{
+}
+
+#MadeBy
+{
+}
+
+.AvatarUsername
+{
+}
+
+.AvatarImage
+{
+    height: 32px;
+    width: 32px;
+    background-color: black;
+}
+
+#And
+{
+}
+
+#ThroneText,
+#CoinsText,
+#ItemsText
+{
+    margin-right: 20px;
+}
+
+.Header
+{
+        font-size: 18px;
+    font-weight: bold;
+        margin-top: 36px;
+        text-transform: uppercase;
+}
+
+#ObjectiveHeader
+{
+        margin-top: 18px;
+}
+
+.InfoRow
+{
+    flow-children: right;
+    width: 100%;
+}
+
+
+Label .midas_throne,
+Label .overboss,
+Label .treasure
+{
+    color: #cccccc;
+    font-weight: bold;
+}
+
+Label .items,
+Label .gold,
+Label .xp
+{
+    color: #fcaf3d;
+    font-weight: bold;
+}

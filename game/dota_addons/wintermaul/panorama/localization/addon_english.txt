@@ -1,0 +1,72 @@
+"addon"
+{
+	"InstructionsTitle"								"WINTERMAUL"
+	"InstructionsObjective"							"OBJECTIVE"
+	"InstructionsObjectiveText"						"The Duke of Wintermaul is reborn! Send him and his minions packing!!!"
+	"InstructionsHowToPlay"							"HOW TO PLAY"
+	"InstructionsLines"								"-"
+	
+	"addonname"										"Wintermaul"
+	"wintermaul_game_info_header_objective"			"Objective:"
+	"wintermaul_brief_description"					"The Duke of Wintermaul is reborn! Send him and his minions packing!!!"
+	"wintermaul_made_by"					"Proudly made by"
+	"wintermaul_made_by_and"					" and "
+	"wintermaul_game_info_header_how_to_play"		"How To Play:"
+	"wintermaul_game_info_throne"					"Select a builder and construct towers to prevent the Duke's minions from reaching the ship."
+	"wintermaul_game_info_coins"						"Construct a maze with your towers to force his creeps to take the longest path possible. Blocking the path is not allowed."
+	"wintermaul_game_info_items"						"This game is designed for 9 players."
+
+	//===================================================================
+	// Unit Title
+	//===================================================================
+	"DOTA_Wintermaul_Round_Pre-Game_Title"				"Pre-Game"
+	"DOTA_Wintermaul_Round_Scouts_Title"				"Scout"
+	"DOTA_Wintermaul_Round_Engineers_Title"				"Engineer"
+	"DOTA_Wintermaul_Round_Night_Ranger_Title"			"Night ranger"
+	"DOTA_Wintermaul_Round_Barbarian_Title"				"Barbarian"
+	"DOTA_Wintermaul_Round_Drake_Title"					"Drake"
+	"DOTA_Wintermaul_Round_Stalker_Title"				"Stalker"
+	"DOTA_Wintermaul_Round_Water_Runner_Title"			"Water runner"
+	"DOTA_Wintermaul_Round_Angry_Spirit_Title"			"Angry spirit"
+	"DOTA_Wintermaul_Round_Raptor_Rider_Title"			"Raptor rider"
+	"DOTA_Wintermaul_Round_Hovercraft_Title"			"Hovercraft"
+	"DOTA_Wintermaul_Round_Goblin_Machine_Title"		"Goblin machine"
+	"DOTA_Wintermaul_Round_Frosty_Reptile_Title"		"Frosty reptile"
+	"DOTA_Wintermaul_Round_Demonic_Pet_Title"			"Demonic pet"
+	"DOTA_Wintermaul_Round_Rock_Elemental_Title"		"Rock Elemental"
+	"DOTA_Wintermaul_Round_Young_Dragon_Title"			"Young Dragon"
+	"DOTA_Wintermaul_Round_Eternal_Spirit_Title"		"Eternal spirit"
+	"DOTA_Wintermaul_Round_Angry_Ogre_Title"			"Angry Ogre"
+	"DOTA_Wintermaul_Round_Walking_Corpse_Title"		"Walking corpse"
+	"DOTA_Wintermaul_Round_Totem_Carrier_Title"			"Totem carrier"
+	"DOTA_Wintermaul_Round_Bat_People_Title"			"Bat people"
+	"DOTA_Wintermaul_Round_High_Mage_Title"				"High mage"
+	"DOTA_Wintermaul_Round_Frozen_Infernal_Title"		"Frozen infernal"
+	"DOTA_Wintermaul_Round_Possessed_Hunter_Title"		"Possessed hunter"
+	"DOTA_Wintermaul_Round_Polar_Bear_Title"			"Polar bear"
+	"DOTA_Wintermaul_Round_Dragon_Title"				"Dragon"
+	"DOTA_Wintermaul_Round_Corrupt_Chieftain_Title"		"Corrupt chieftain"
+	"DOTA_Wintermaul_Round_Soldier_Title"				"Soldier"
+	"DOTA_Wintermaul_Round_Spider_Fiend_Title"			"Spider fiend"
+	"DOTA_Wintermaul_Round_Armored_Wisp_Title"			"Armored wisp"
+	"DOTA_Wintermaul_Round_Duke_Wintermaul_Title"		"Duke wintermaul"
+
+	//===================================================================
+	// Unit Elements (Constituance)
+	//===================================================================
+
+	"DOTA_Wintermaul_Round_Element_Normal"				"Normal"
+	"DOTA_Wintermaul_Round_Element_Air"					"Air"
+	"DOTA_Wintermaul_Round_Element_Evasion"				"Immune"
+	"DOTA_Wintermaul_Round_Element_Splitter"			"Splitter"
+	"DOTA_Wintermaul_Round_Element_Haste"				"Haste"
+	"DOTA_Wintermaul_Round_Element_Boss"				"Boss"
+	"DOTA_Wintermaul_Round_Element_Bonus"				"Bonus"
+	
+	"error_invalid_build_position"						"Can't Build Here"
+	"error_not_enough_gold"								"Not Enough Gold"
+	"error_building_would_block_paths"					"Building would block path!"
+	"error_building_site_is_blocked"					"Building Site Is Blocked"
+	"error_cant_target_air"								"Can't target air units"
+}
+

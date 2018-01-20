@@ -1,0 +1,366 @@
+
+DEBUG_SPEW = 0
+--[[
+	-CONSOLE COMMANDS-
+	test rounds with:
+		wintermaul_test_round x y
+	where x is any number between 1 and maxnumber of rounds
+	and y is delay(leave blank if no delay desired) number greater than 0
+
+	test lives with:
+		wintermaul_test_lives x
+	where x is any number greater than 0
+]]
+require('mechanics/attacks')
+
+function CWintermaulGameMode:InitGameMode()
+	self._nRoundNumber = 1
+	self._currentRound = nil
+	self._flLastThinkGameTime = nil
+	self._nCurrentSpawnerID = 1
+	self._nLivesLeft = 40
+	self._diff = {}
+	self:_ReadGameConfiguration()
+	self._szMainQuestTitle = "#DOTA_Quest_Wintermaul_Main_Title"
+
+	GameRules:SetShowcaseTime( 0.0 ) 
+	GameRules:SetSameHeroSelectionEnabled( true )
+	GameRules:SetTimeOfDay( 0.75 )
+	GameRules:SetHeroRespawnEnabled( false )
+	GameRules:SetUseUniversalShopMode( false )
+	GameRules:SetHeroSelectionTime( 30.0 )
+	GameRules:SetStrategyTime(0.0)
+	GameRules:SetPreGameTime( 20.0 )
+	GameRules:SetPostGameTime( 30.0 )
+	GameRules:SetTreeRegrowTime( 60.0 )
+	GameRules:SetCreepMinimapIconScale( 0.7 )
+	GameRules:SetRuneMinimapIconScale( 0.7 )
+	GameRules:SetGoldPerTick( 0 )
+	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_GOODGUYS,9)
+	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS,0)
+	GameRules:GetGameModeEntity():SetRemoveIllusionsOnDeath( true )
+	GameRules:GetGameModeEntity():SetTopBarTeamValuesOverride( true )
+	GameRules:GetGameModeEntity():SetTopBarTeamValuesVisible( false )
+	GameRules:GetGameModeEntity():SetFogOfWarDisabled ( true )
+	--GameRules:GetGameModeEntity():SetCustomHeroMaxLevel( 1 )
+	--GameRules:GetGameModeEntity():SetUseCustomHeroLevels ( true )
+
+	ListenToGameEvent( "dota_player_pick_hero", Dynamic_Wrap( CWintermaulGameMode, "OnPlayerPicked" ), self )
+	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( CWintermaulGameMode, "OnGameRulesStateChange" ), self )
+	ListenToGameEvent( "entity_killed", Dynamic_Wrap(CWintermaulGameMode, "OnEntityKilled"), self)
+	ListenToGameEvent( "player_reconnected", Dynamic_Wrap(CWintermaulGameMode, "OnPlayerReconnect"), self)
+	
+	CustomGameEventManager:RegisterListener("diff_event", 
+		function(eventSourceIndex, args) 
+			self._diff["hp"] = args["hp"]
+			self._diff["lives"] = args["lives"]
+			self._diff["endless"] = args["endless"] --use this to loop the rounds if selected, either 1/0
+			print("endless mode?", self._diff["endless"])
+			CustomGameEventManager:Send_ServerToAllClients("wave_life_update", {lives = string.format("%d", args["lives"])})
+		end 
+	)
+
+
+
+	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.25 )
+
+	-- Gamemode stuff
+
+	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1300)
+
+	-- DebugPrint
+	Convars:RegisterConvar('debug_spew', tostring(DEBUG_SPEW), 'Set to 1 to start spewing debug info. Set to 0 to disable.', 1)
+	Convars:RegisterCommand( "wintermaul_test_round", function(...) return self:_TestRoundConsoleCommand( ... ) end, "Test a wintermaul round.", FCVAR_CHEAT )
+	Convars:RegisterCommand( "wintermaul_test_lives", function(...) return self:_TestLivesConsoleCommand( ... ) end, "Test lives.", FCVAR_CHEAT )
+
+	-- Register Listeners
+	ListenToGameEvent( "npc_spawned", Dynamic_Wrap(CWintermaulGameMode, "onNPCSpawn"), self)
+
+	-- Full units file to get the custom values
+	GameRules.AbilityKV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
+  	GameRules.UnitKV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+  	GameRules.HeroKV = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
+  	GameRules.ItemKV = LoadKeyValues("scripts/npc/npc_items_custom.txt")
+  	-- GameRules.Requirements = some tech tree
+	
+    -- Attack net table
+    Attacks:Init()
+	
+  	-- Setup the Wintermaul Quest.
+  	self.MainQuest = SpawnEntityFromTableSynchronous( "quest", {
+  	 name = "MainQuest",
+  	 title = self._szMainQuestTitle
+  	 })
+
+  	-- Text on the quest timer at start.
+  	self.MainQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nLivesLeft)
+
+	print( "Wintermaul is loaded." )
+end
+
+-- assign invincibility to the heroes
+function CWintermaulGameMode:onNPCSpawn( keys )
+
+	local spawnedUnit = EntIndexToHScript( keys.entindex )
+	if spawnedUnit:IsRealHero() then
+		-- add the invulnerable modifier to the hero
+		spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_invulnerable", nil)
+		for e=0,15 do
+			if (spawnedUnit:GetAbilityByIndex(e)==nil) then
+				break
+			else
+				spawnedUnit:GetAbilityByIndex(e):SetLevel(1)
+				spawnedUnit:SetAbilityPoints(0)
+			end
+		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_crystal_maiden" then
+			print("removing maiden stuff")
+			--enters if-statement but gold gain is still active?
+			spawnedUnit:RemoveAbility("special_bonus_gold_income_20")
+			spawnedUnit:RemoveAbility("special_bonus_unique_crystal_maiden_1")
+			spawnedUnit:RemoveAbility("special_bonus_unique_crystal_maiden_2")
+		end
+	end
+end
+
+-- Read and assign configurable keyvalues if applicable
+function CWintermaulGameMode:_ReadGameConfiguration()
+	local kv = LoadKeyValues( "scripts/maps/wintermaul_map_config.txt" )
+	kv = kv or {} -- Handle the case where there is not keyvalues file
+
+	self._flPrepTimeBetweenRounds = tonumber( kv.PrepTimeBetweenRounds or 0 )
+
+	self:_ReadSpawnsConfiguration( kv["Spawns"] )
+	self:_ReadRoundConfigurations( kv["Waves"] )
+end
+
+
+-- Verify valid spawns are defined and build a table with them from the keyvalues file
+function CWintermaulGameMode:_ReadSpawnsConfiguration( kvSpawns )
+	self._vSpawnsList = {}
+	if type( kvSpawns ) ~= "table" then
+		return
+	end
+	for _,sp in pairs( kvSpawns ) do			-- Note "_" used as a shortcut to create a temporary throwaway variable
+		table.insert( self._vSpawnsList, {
+			szSpawnerName = sp.SpawnerName or "",
+			szAirWaypoint = sp.AirWaypoint or "",
+			szGroundWaypoint = sp.GroundWaypoint or ""
+		} )
+	end
+	-- for k,v in pairs( self._vSpawnsList ) do
+	-- 	print("key: ", k, "val: ", v.szSpawnerName, v.szFirstWaypoint)
+	-- end
+end
+
+-- Set number of rounds without requiring index in text file
+function CWintermaulGameMode:_ReadRoundConfigurations( kv )
+	self._vRounds = {}
+	while true do
+		local szRoundName = string.format("Wave%d", #self._vRounds + 1 )
+		local kvRoundData = kv[ szRoundName ]
+		if kvRoundData == nil then
+			return
+		end
+		local roundObj = CWintermaulGameRound()
+
+		roundObj:ReadConfiguration( kvRoundData, self, #self._vRounds + 1 )
+		table.insert( self._vRounds, roundObj )
+	end
+end
+
+function CWintermaulGameMode:GetCurrentRound()
+	return self._vRounds[self._nRoundNumber]
+end
+
+-- When game state changes set state in script
+function CWintermaulGameMode:OnGameRulesStateChange()
+	local nNewState = GameRules:State_Get()
+
+	if nNewState == DOTA_GAMERULES_STATE_STRATEGY_TIME then
+		print("time to check if the player has a hero!")
+		for i=0, DOTA_MAX_TEAM_PLAYERS do
+			if PlayerResource:HasSelectedHero(i) == false then
+	            local player = PlayerResource:GetPlayer(i)
+	            if player then
+	            	print("Randoming hero for player ", i)
+	            	player:MakeRandomHeroSelection()
+	            end
+	        end
+	    end
+	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
+		CustomUI:DynamicHud_Create(0, "diffPan", "file://{resources}/layout/custom_game/test_diff.xml", nil)
+	end
+
+	if nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+		self._flPrepTimeEnd = GameRules:GetGameTime() + self._flPrepTimeBetweenRounds
+	end
+end
+
+-- sets ability points to 0 and sets skills to lvl1 at start.
+function CWintermaulGameMode:OnPlayerPicked( keys )
+
+	local player = EntIndexToHScript(keys.player)
+	for nPlayerID = 0, DOTA_MAX_PLAYERS-1 do
+		PlayerResource:SetGold(nPlayerID, 100, false)
+	end
+end
+
+function CWintermaulGameMode:_ThinkPrepTime()
+	if GameRules:GetGameTime() >= self._flPrepTimeEnd then
+		self._flPrepTimeEnd = nil
+		if self._entPrepTimeQuest then
+			UTIL_RemoveImmediate( self._entPrepTimeQuest )
+			self._entPrepTimeQuest = nil
+		end
+
+		if self._nRoundNumber > #self._vRounds then
+			GameRules:SetGameWinner( DOTA_TEAM_GOODGUYS )
+			return false
+		end
+		self._currentRound = self._vRounds[ self._nRoundNumber ]
+		self._currentRound:Begin()
+		return
+	end
+
+	if not self._entPrepTimeQuest then
+		self._vRounds[ self._nRoundNumber ]:Precache()
+	end
+
+	local time_data =
+	{
+		time_till_round_start = string.format( "%.f", self._flPrepTimeEnd - GameRules:GetGameTime()),
+	}
+	CustomGameEventManager:Send_ServerToAllClients("wave_time_update", time_data)
+end
+
+
+-- this is the thinker. it thinks
+-- Evaluate the state of the game
+function CWintermaulGameMode:OnThink()
+	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+		--self:_CheckForDefeat()
+		--self:_ThinkLootExpiry()
+
+		if self._flPrepTimeEnd ~= nil then
+			self:_ThinkPrepTime()
+
+		elseif self._currentRound ~= nil then
+			self._currentRound:Think()
+			if self._currentRound:IsFinished() then
+				self._currentRound:End()
+				self._currentRound = nil
+
+				self._nRoundNumber = self._nRoundNumber + 1
+				if self._nRoundNumber > #self._vRounds then
+					self._nRoundNumber = 1
+					GameRules:MakeTeamLose( DOTA_TEAM_BADGUYS )
+				else
+					self._flPrepTimeEnd = GameRules:GetGameTime() + self._flPrepTimeBetweenRounds --10
+				end
+			end
+		end
+	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then		-- Safe guard catching any state that may exist beyond DOTA_GAMERULES_STATE_POST_GAME
+		return nil
+	end
+	return 1
+end
+
+function CWintermaulGameMode:OnEntityKilled( event )
+	-- The Unit that was Killed
+	local killedUnit = EntIndexToHScript(event.entindex_killed)
+	-- The Killing entity
+	local killerEntity
+	if event.entindex_attacker then
+		killerEntity = EntIndexToHScript(event.entindex_attacker)
+	end
+
+	-- Player owner of the unit
+	local player = killedUnit:GetPlayerOwner()
+	
+	if IsCustomBuilding(killedUnit) then
+		 -- Building Helper grid cleanup
+		BuildingHelper:RemoveBuilding(killedUnit, true)
+
+		-- Check units for downgrades
+		local building_name = killedUnit:GetUnitName()
+		--[[
+		-- Substract 1 to the player building tracking table for that name
+		if player.buildings[building_name] then
+			player.buildings[building_name] = player.buildings[building_name] - 1
+		end
+
+		-- possible unit downgrades
+		for k,units in pairs(player.units) do
+			CheckAbilityRequirements( units, player )
+		end
+
+		-- possible structure downgrades
+		for k,structure in pairs(player.structures) do
+			CheckAbilityRequirements( structure, player )
+		end
+		]]--
+	end
+end
+
+function CWintermaulGameMode:LifeLost()
+	self._nLivesLeft = self._nLivesLeft - 1
+	--print("Ouch! Lost one life! ", self._nLivesLeft, " lives remaining." )
+
+	local life_data =
+	{
+		lives = string.format("%d", self._nLivesLeft),
+	}
+	CustomGameEventManager:Send_ServerToAllClients("wave_life_update", life_data)
+
+	-- Update Quest UI
+	self.MainQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nLivesLeft)
+	if self._nLivesLeft == 0 then
+		GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS )
+	end
+end
+
+function CWintermaulGameMode:OnPlayerReconnect()
+	local life_data =
+	{
+		lives = string.format("%d", self._nLivesLeft),
+	}
+	CustomGameEventManager:Send_ServerToAllClients("wave_life_update", life_data)
+end
+
+
+function CWintermaulGameMode:_TestRoundConsoleCommand( cmdName, roundNumber, delay )
+	local nRoundToTest = tonumber( roundNumber )
+	print (string.format( "Testing round %d", nRoundToTest ) )
+	if nRoundToTest <= 0 or nRoundToTest > #self._vRounds then
+		Msg( string.format( "Cannot test invalid round %d", nRoundToTest ) )
+		return
+	end
+
+	if self._currentRound ~= nil then
+		self._currentRound:End()
+		self._currentRound = nil
+	end
+
+	self._flPrepTimeEnd = GameRules:GetGameTime() + self._flPrepTimeBetweenRounds
+	self._nRoundNumber = nRoundToTest
+	if delay ~= nil then
+		self._flPrepTimeEnd = GameRules:GetGameTime() + tonumber( delay )
+	end
+end
+
+function CWintermaulGameMode:_TestLivesConsoleCommand( cmdName, livesNumber)
+	local nLivesToGet = tonumber( livesNumber )
+	print (string.format( "Testing %d lives", nLivesToGet ) )
+	if nLivesToGet <= 0 then
+		Msg( string.format( "Cannot test invalid lives %d", nLivesToGet ) )
+		return
+	end
+	self._nLivesLeft = nLivesToGet
+
+	local life_data =
+	{
+		lives = string.format("%d", self._nLivesLeft),
+	}
+	CustomGameEventManager:Send_ServerToAllClients("wave_life_update", life_data)
+end
