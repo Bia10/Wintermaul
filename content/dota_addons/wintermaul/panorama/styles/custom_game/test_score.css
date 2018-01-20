@@ -73,3 +73,11 @@
 	color :white;
 	text-align: right;
 }
+.SlideLeft
+{
+	transform: translatex( -300px);
+}
+.SlideRight
+{
+	transform: translatex( 300px);
+}

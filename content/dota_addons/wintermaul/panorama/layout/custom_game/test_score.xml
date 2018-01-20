@@ -21,7 +21,7 @@
 	</snippets>
 
 	<Panel class="Root">
-		<Button class="btn" onmouseover="AddStyle( hover )" onmouseout="RemoveStyle( hover )" onactivate="BoardVisibility" >
+		<Button class="btn" onmouseover="AddStyle( hover )" onmouseout="RemoveStyle( hover )" onactivate="BoardVisibility()" >
 			</Button>
 		<Panel id="ScoreBoard">
 			<Label id="ScoreName" text="Stats"> </Label>
