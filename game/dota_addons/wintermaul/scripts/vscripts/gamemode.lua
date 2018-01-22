@@ -59,11 +59,13 @@ function CWintermaulGameMode:InitGameMode()
 		function(eventSourceIndex, args) 
 			self._diff["hp"] = args["hp"]
 			self._diff["lives"] = args["lives"]
+			self._nLivesLeft = self._diff["lives"]
 			self._diff["endless"] = args["endless"] --use this to loop the rounds if selected, either 1/0
 			print("endless mode?", self._diff["endless"])
 			CustomGameEventManager:Send_ServerToAllClients("wave_life_update", {lives = string.format("%d", args["lives"])})
 		end 
 	)
+	
 
 	-- DebugPrint
 	Convars:RegisterConvar('debug_spew', tostring(DEBUG_SPEW), 'Set to 1 to start spewing debug info. Set to 0 to disable.', 1)
