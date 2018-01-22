@@ -11,6 +11,7 @@ DEBUG_SPEW = 0
 		wintermaul_test_lives x
 	where x is any number greater than 0
 ]]
+
 require('mechanics/attacks')
 
 function CWintermaulGameMode:InitGameMode()
@@ -44,7 +45,11 @@ function CWintermaulGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetFogOfWarDisabled ( true )
 	--GameRules:GetGameModeEntity():SetCustomHeroMaxLevel( 1 )
 	--GameRules:GetGameModeEntity():SetUseCustomHeroLevels ( true )
+	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.25 )
+	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1300)
 
+	-- Register Listeners
+	ListenToGameEvent( "npc_spawned", Dynamic_Wrap(CWintermaulGameMode, "onNPCSpawn"), self)
 	ListenToGameEvent( "dota_player_pick_hero", Dynamic_Wrap( CWintermaulGameMode, "OnPlayerPicked" ), self )
 	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( CWintermaulGameMode, "OnGameRulesStateChange" ), self )
 	ListenToGameEvent( "entity_killed", Dynamic_Wrap(CWintermaulGameMode, "OnEntityKilled"), self)
@@ -60,21 +65,10 @@ function CWintermaulGameMode:InitGameMode()
 		end 
 	)
 
-
-
-	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.25 )
-
-	-- Gamemode stuff
-
-	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1300)
-
 	-- DebugPrint
 	Convars:RegisterConvar('debug_spew', tostring(DEBUG_SPEW), 'Set to 1 to start spewing debug info. Set to 0 to disable.', 1)
 	Convars:RegisterCommand( "wintermaul_test_round", function(...) return self:_TestRoundConsoleCommand( ... ) end, "Test a wintermaul round.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "wintermaul_test_lives", function(...) return self:_TestLivesConsoleCommand( ... ) end, "Test lives.", FCVAR_CHEAT )
-
-	-- Register Listeners
-	ListenToGameEvent( "npc_spawned", Dynamic_Wrap(CWintermaulGameMode, "onNPCSpawn"), self)
 
 	-- Full units file to get the custom values
 	GameRules.AbilityKV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
@@ -116,6 +110,9 @@ function CWintermaulGameMode:onNPCSpawn( keys )
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_crystal_maiden" then
 			spawnedUnit:RemoveAbility("special_bonus_gold_income_15")
 		end
+
+		print(spawnedUnit:GetPlayerOwnerID(), " is owner of ", spawnedUnit:GetUnitName())
+		CustomGameEventManager:Send_ServerToAllClients("new_player", {id = spawnedUnit:GetPlayerOwnerID()})
 	end
 end
 
@@ -174,7 +171,6 @@ function CWintermaulGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
 
 	if nNewState == DOTA_GAMERULES_STATE_STRATEGY_TIME then
-		print("time to check if the player has a hero!")
 		for i=0, DOTA_MAX_TEAM_PLAYERS do
 			if PlayerResource:HasSelectedHero(i) == false then
 	            local player = PlayerResource:GetPlayer(i)
@@ -201,6 +197,7 @@ function CWintermaulGameMode:OnPlayerPicked( keys )
 		PlayerResource:SetGold(nPlayerID, 100, false)
 	end
 end
+
 
 function CWintermaulGameMode:_ThinkPrepTime()
 	if GameRules:GetGameTime() >= self._flPrepTimeEnd then
