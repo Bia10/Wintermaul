@@ -1,0 +1,14 @@
+<root>
+	<styles>
+        <include src="file://{resources}/styles/custom_game/test_score.css" />
+	</styles>
+
+	<Panel class="Player" >
+		<Panel id="LeftSide" >
+			<Label id="PlayerName" text="Player 1"> </Label>
+		</Panel>
+		<Panel id="RightSide" >
+			<Label id="PlayerKills" text="0"> </Label>
+		</Panel>
+	</Panel>
+</root>

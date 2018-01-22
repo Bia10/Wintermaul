@@ -7,27 +7,13 @@
         <include src="file://{resources}/scripts/custom_game/test_score.js" />
 	</scripts>
 
-	<snippets>
-		<snippet name="Player">
-			<Panel class="Player" >
-				<Panel id="LeftSide" >
-					<Label id="PlayerName" text="Player 3"> </Label>
-				</Panel>
-				<Panel id="RightSide" >
-					<Label id="PlayerKills" text="1000000000"> </Label>
-				</Panel>
-			</Panel>
-		</snippet>
-	</snippets>
-
 	<Panel class="Root">
-		<Button class="btn" onmouseover="AddStyle( hover )" onmouseout="RemoveStyle( hover )" onactivate="BoardVisibility()" >
-			</Button>
+		<Button class="btn" onmouseover="AddStyle( hover )" onmouseout="RemoveStyle( hover )" onactivate="BoardVisibility()" text=">"> 
+			<Label id="btnText" text=">"> </Label>
+		</Button>
 		<Panel id="ScoreBoard">
 			<Label id="ScoreName" text="Stats"> </Label>
-			<Panel id="Players">
 
-			</Panel>
 		</Panel>
 	</Panel>
 </root>
