@@ -23,14 +23,7 @@ function ScoreAdd( id ){
 }
 
 GameEvents.Subscribe( "new_player", ScoreAdd);
-GameEvents.Subscribe( "new_score", ScoreUpdate);
-
-function debug(){
-	$.Msg("Debug!"); 
-}
-
-debug(); 
-//$.GetContextPanel().SetHasClass("Player", false);
+GameEvents.Subscribe( "new_score", ScoreUpdate); 
 
 var clicked = false 
 function BoardVisibility(){
