@@ -103,9 +103,9 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		var playerColorBar = playerPanel.FindChildInLayoutFile( "PlayerColorBar" );
 		if ( playerColorBar !== null )
 		{
-			if ( GameUI.CustomUIConfig().team_colors )
+			if ( GameUI.CustomUIConfig().player_colors )
 			{
-				var teamColor = GameUI.CustomUIConfig().team_colors[ playerId ];
+				var teamColor = GameUI.CustomUIConfig().player_colors[ playerId ];
 				if ( teamColor )
 				{
 					playerColorBar.style.backgroundColor = teamColor;
@@ -398,7 +398,7 @@ function ScoreboardUpdater_InitializeScoreboard( scoreboardConfig, scoreboardPan
 	if ( typeof(scoreboardConfig.shouldSort) === 'undefined')
 	{
 		// default to true
-		scoreboardConfig.shouldSort = true;
+		scoreboardConfig.shouldSort = false;
 	}
 	_ScoreboardUpdater_UpdateAllTeamsAndPlayers( scoreboardConfig, scoreboardPanel );
 	return { "scoreboardConfig": scoreboardConfig, "scoreboardPanel":scoreboardPanel }

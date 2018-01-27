@@ -12,10 +12,10 @@ function ScoreAdd( id ){
 
 	panel.BLoadLayout("file://{resources}/layout/custom_game/score_child.xml",false,false);
 	$.Msg(id.id)
-	$.Msg("adding ", Players.GetPlayerName(1), ", with color ", GameUI.CustomUIConfig().team_colors[ id.id ], " to scorelist.");
+	$.Msg("adding ", Players.GetPlayerName(1), ", with color ", GameUI.CustomUIConfig().player_colors[ id.id ], " to scorelist.");
 
 	panel.FindChildTraverse('PlayerName').text = Players.GetPlayerName(id.id);
-	panel.FindChildTraverse('PlayerName').style.color = GameUI.CustomUIConfig().team_colors[ id.id ];
+	panel.FindChildTraverse('PlayerName').style.color = GameUI.CustomUIConfig().player_colors[ id.id ];
 	panel.FindChildTraverse('PlayerKills').text = Players.GetLastHits(id.id);
 
 	panel.name = Players.GetPlayerName(id.id);
