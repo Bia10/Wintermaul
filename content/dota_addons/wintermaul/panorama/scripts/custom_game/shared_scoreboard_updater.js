@@ -105,7 +105,7 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		{
 			if ( GameUI.CustomUIConfig().team_colors )
 			{
-				var teamColor = GameUI.CustomUIConfig().team_colors[ playerInfo.player_team_id ];
+				var teamColor = GameUI.CustomUIConfig().team_colors[ playerId ];
 				if ( teamColor )
 				{
 					playerColorBar.style.backgroundColor = teamColor;
