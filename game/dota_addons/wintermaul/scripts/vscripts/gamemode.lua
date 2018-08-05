@@ -4,6 +4,7 @@ DEBUG_SPEW = 0
 
 require('mechanics/attacks')
 
+
 function CWintermaulGameMode:InitGameMode()
 	self._nRoundNumber = 1
 	self._currentRound = nil
@@ -52,11 +53,10 @@ function CWintermaulGameMode:InitGameMode()
 			self._nLivesLeft = self._diff["lives"]
 			self._diff["endless"] = args["endless"] --use this to loop the rounds if selected, either 1/0
 			print("endless mode?", self._diff["endless"])
-			CustomNetTables:SetTableValue("game_state", {lives_remaining = string.format("%d", args["lives"])})
+			CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = string.format("%d", args["lives"])})
 		end 
 	)
-	
-
+    
 	-- DebugPrint
 	Convars:RegisterConvar('debug_spew', tostring(DEBUG_SPEW), 'Set to 1 to start spewing debug info. Set to 0 to disable.', 1)
 
@@ -78,6 +78,10 @@ function CWintermaulGameMode:InitGameMode()
 
   	-- Text on the quest timer at start.
   	self.MainQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nLivesLeft)
+    
+    -- Registering custom commands
+    Convars:RegisterCommand( "wintermaul_set_round", function(...) return self:_SetRound( ... ) end, "Start playing a specific Wintermaul round", FCVAR_CHEAT )
+    Convars:RegisterCommand( "wintermaul_set_lives_remaining", function(...) return self:_SetLivesRemaining( ... ) end, "Set the lives remaining for Wintermaul.", FCVAR_CHEAT )
 
 	print( "Wintermaul is loaded." )
 end
@@ -287,7 +291,7 @@ function CWintermaulGameMode:LifeLost()
 	self._nLivesLeft = self._nLivesLeft - 1
 	--print("Ouch! Lost one life! ", self._nLivesLeft, " lives remaining." )
 
-	CustomGameEventManager:Send_ServerToAllClients("wave_life_update", {lives_remaining = string.format("%d", self._nLivesLeft)})
+	CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = string.format("%d", self._nLivesLeft)})
 
 	-- Update Quest UI
 	self.MainQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, self._nLivesLeft)
@@ -297,5 +301,40 @@ function CWintermaulGameMode:LifeLost()
 end
 
 function CWintermaulGameMode:OnPlayerReconnect()
-	// Do nothing for now
+	-- Do nothing for now
 end
+
+-- Custom commands go here
+function CWintermaulGameMode:_SetRound( cmdName, roundNumber, delay )
+	local nRoundToTest = tonumber( roundNumber )
+	print (string.format( "Testing round %d", nRoundToTest ) )
+	if nRoundToTest <= 0 or nRoundToTest > #self._vRounds then
+		Msg( string.format( "Cannot test invalid round %d", nRoundToTest ) )
+		return
+	end
+
+	if self._currentRound ~= nil then
+		self._currentRound:End()
+		self._currentRound = nil
+	end
+
+	self._flPrepTimeEnd = GameRules:GetGameTime() + self._flPrepTimeBetweenRounds
+	self._nRoundNumber = nRoundToTest
+	if delay ~= nil then
+		self._flPrepTimeEnd = GameRules:GetGameTime() + tonumber( delay )
+	end
+end
+
+function CWintermaulGameMode:_SetLivesRemaining( cmdName, livesNumber)
+	local nLivesToGet = tonumber( livesNumber )
+	print (string.format( "Testing %d lives", nLivesToGet ) )
+	if nLivesToGet <= 0 then
+		Msg( string.format( "Cannot test invalid lives %d", nLivesToGet ) )
+		return
+	end
+	self._nLivesLeft = nLivesToGet
+
+	CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = string.format("%d", self._nLivesLeft)})
+end
+
+

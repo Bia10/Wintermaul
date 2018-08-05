@@ -30,7 +30,6 @@ function ScoreUpdate() {
         // Descending: second age less than the first
         return obj2.score - obj1.score;
     });
-    $.Msg(player_stats)
     
     for (var key in player_stats) {
         player = player_stats[key]
