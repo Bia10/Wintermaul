@@ -211,11 +211,7 @@ function CWintermaulGameMode:_ThinkPrepTime()
 		self._vRounds[ self._nRoundNumber ]:Precache()
 	end
 
-	local time_data =
-	{
-		time_till_round_start = string.format( "%.f", self._flPrepTimeEnd - GameRules:GetGameTime()),
-	}
-	CustomGameEventManager:Send_ServerToAllClients("wave_time_update", time_data)
+	CustomNetTables:SetTableValue("game_state", "round_time_to_start", {value = string.format( "%.f", self._flPrepTimeEnd - GameRules:GetGameTime())})
 end
 
 

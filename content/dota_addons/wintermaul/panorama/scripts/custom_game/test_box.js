@@ -1,22 +1,30 @@
-
-function SetWaveText(event_data)
+function InitGameInfoBox()
 {
-	var currentNumber = event_data.roundData;
-	var current = event_data.currentTitle;
-	var next = event_data.nextTitle;
-	var currentspecial = event_data.currentSpecial;
-	var nextspecial = event_data.nextSpecial;
+    SetRoundWaveData(CustomNetTables.GetTableValue("game_state", "round_wave_data"));
+    SetRoundTimeToStart(CustomNetTables.GetTableValue("game_state", "round_time_to_start"));
+    SetRoundCreepData(CustomNetTables.GetTableValue("game_state", "round_creep_data"));
+    SetLivesRemaining(CustomNetTables.GetTableValue("game_state", "lives_remaining"));
+}
+
+
+function SetRoundWaveData(round_wave_data)
+{
+	var currentNumber = round_wave_data.roundData;
+	var current = round_wave_data.currentTitle;
+	var next = round_wave_data.nextTitle;
+	var currentspecial = round_wave_data.currentSpecial;
+	var nextspecial = round_wave_data.nextSpecial;
 
 	var waveNumber = $( "#CurrentWaveNumber" );
 	var nextwavetext = $( "#NextWaveText" );
 	var currentwavetext = $("#CurrentWaveText");
 	var nextwave = $("#NextWave");
-	var currentwavetop = $("#CurrentWaveTop"); //Here if needed for later.
-	var currentwavebot = $( "#CurrentWaveBot"); //Here if needed for later.
+	var currentwavetop = $("#CurrentWaveTop"); // Here if needed for later.
+	var currentwavebot = $( "#CurrentWaveBot"); // Here if needed for later.
 
-	//$.Msg(event_data.roundData);
 
-//--------------- current wave ---------------
+    //--------------- current wave ---------------
+    
 	waveNumber.text = currentNumber;
 
 	if ( currentspecial == "#DOTA_Wintermaul_Round_Element_Air") //Air lvls
@@ -69,7 +77,8 @@ function SetWaveText(event_data)
 		currentwavetext.text = $.Localize( current );
 	}
 
-//--------------- next wave ---------------
+    //--------------- next wave ---------------
+    
 	if (nextspecial == "#DOTA_Wintermaul_Round_Element_Air") //Air lvls
 	{
 		nextwavetext.style.color = "orange";
@@ -121,16 +130,16 @@ function SetWaveText(event_data)
 	}
 }
 
-function SetWaveTime(time_data)
+function SetRoundTimeToStart(round_time_to_start)
 {
 	var timertext = $( "#TimerText" );
 	var timertime = $( "#TimerTime" );
 	
 	timertext.text = "Next wave will spawn in: ";
-	timertime.text = time_data.time_till_round_start;
+	timertime.text = round_time_to_start.value;
 }
 
-function SetCreepsRemaining(creep_data)
+function SetRoundCreepData(creep_data)
 {
 	var timertext = $( "#TimerText" );
 	var timertime = $( "#TimerTime" );
@@ -139,11 +148,11 @@ function SetCreepsRemaining(creep_data)
 	timertime.text = creep_data.enemiesremaining + " / " + creep_data.totalenemies;
 }
 
-function SetLivesLeft(life_data)
+function SetLivesRemaining(lives_remaining)
 {
 	var lifecolor;
 	var lifetext = $( "#LifeNumber" );
-	lifetext.text = life_data.lives;
+	lifetext.text = lives_remaining.value;
 	if (Number(lifetext.text) > 20)
 	{
 		lifecolor = "#ffe5e5";
@@ -163,10 +172,40 @@ function SetLivesLeft(life_data)
 	lifetext.style.color = lifecolor;
 }
 
-GameEvents.Subscribe( "wave_creeps_remaining", SetCreepsRemaining);
-GameEvents.Subscribe( "wave_time_update", SetWaveTime);
-GameEvents.Subscribe( "wave_new_wave", SetWaveText);
-GameEvents.Subscribe( "wave_life_update", SetLivesLeft);
+function OnGameStateChanged( table_name, key, data )
+{
+    $.Msg("Game state changed")
+    if (key == "lives_remaining")
+    {
+        SetLivesRemaining(data);
+    }
+    else if (key == "round_creep_data")
+    {
+        SetRoundCreepData(data);
+    }
+    else if (key == "round_time_to_start")
+    {
+        SetRoundTimeToStart(data);
+    }
+    else if (key == "round_wave_data")
+    {
+        SetRoundWaveData(data);
+    }
+    else
+    {
+        $.Msg("Unrecognised game_state key: " + key)
+    }
+}
+
+CustomNetTables.SubscribeNetTableListener( "game_state", OnGameStateChanged );
+
+(function () {
+    InitGameInfoBox()
+})();
+
+
+
+// TODO: Move these generic events somewhere else
 GameEvents.Subscribe( "error_building_would_block_paths", function(data) {
 	var eventData = { reason: 80, message: "error_building_would_block_paths" };
 	GameEvents.SendEventClientSide("dota_hud_error_message", eventData);

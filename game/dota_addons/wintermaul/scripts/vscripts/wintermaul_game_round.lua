@@ -66,12 +66,12 @@ function CWintermaulGameRound:Begin()
 
 	--Difficulty block bois
 	if next(self._gameMode._diff) == nil then
-		print("hello")
+		print("Difficulty not selected, defaulting to normal.")  -- TODO this is a repeat of code, need a seperate file that stores the configuration of difficulties
 		self._gameMode._diff["hp"] = 1
 		self._gameMode._diff["lives"] = 40
 		CustomGameEventManager:Send_ServerToAllClients("diff_default", {})
 		self._gameMode._nLivesLeft = self._gameMode._diff["lives"]
-		CustomGameEventManager:Send_ServerToAllClients("wave_life_update", {lives = string.format("%d", self._gameMode._nLivesLeft)})
+		CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = string.format("%d", self._gameMode._nLivesLeft)})
 	end
 
 
@@ -94,7 +94,7 @@ function CWintermaulGameRound:Begin()
 		    nextSpecial = "",
 		}
 	end
-		CustomGameEventManager:Send_ServerToAllClients("wave_new_wave", event_data)
+    CustomNetTables:SetTableValue("game_state", "round_wave_data", event_data)
 
 	self._vEnemiesRemaining = {}
 	self._vEventHandles = {
@@ -134,12 +134,7 @@ function CWintermaulGameRound:Begin()
 	self._entQuest:AddSubquest( self._entKillCountSubquest )
 	self._entKillCountSubquest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, self._nCoreUnitsTotal )
 
-	local creep_data =
-	{
-		enemiesremaining = self._nCoreUnitsTotal,
-		totalenemies = self._nCoreUnitsTotal,
-	}
-	CustomGameEventManager:Send_ServerToAllClients("wave_creeps_remaining", creep_data)
+	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = self._nCoreUnitsTotal, totalenemies = self._nCoreUnitsTotal})
 
 end
 
@@ -262,12 +257,7 @@ function CWintermaulGameRound:OnEntityKilled( event )
 		end
 	end
 
-	local creep_data =
-	{
-		enemiesremaining = string.format( "%d", #self._vEnemiesRemaining),
-		totalenemies = self._nCoreUnitsTotal,
-	}
-	CustomGameEventManager:Send_ServerToAllClients("wave_creeps_remaining", creep_data)
+	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", #self._vEnemiesRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
 function CWintermaulGameRound:OnEntityRemoved( event )
@@ -279,12 +269,7 @@ function CWintermaulGameRound:OnEntityRemoved( event )
 		end
 	end	
 
-	local creep_data =
-	{
-		enemiesremaining = string.format( "%d", #self._vEnemiesRemaining),
-		totalenemies = self._nCoreUnitsTotal,
-	}
-	CustomGameEventManager:Send_ServerToAllClients("wave_creeps_remaining", creep_data)
+	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", #self._vEnemiesRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
 function CWintermaulGameRound:StatusReport( )
@@ -303,22 +288,5 @@ function CWintermaulGameRound:StatusReport( )
 end
 
 function CWintermaulGameRound:OnPlayerReconnect()
-	if nextRoundNumber <= #self._gameMode._vRounds then
-		event_data =
-		{
-		    currentTitle = self._szRoundTitle,
-		    nextTitle = nextRound._szRoundTitle,
-		    currentSpecial = self._szRoundElement,
-		    nextSpecial = nextRound._szRoundElement,
-		}
-	else
-		event_data =
-		{
-		    currentTitle = self._szRoundTitle,
-		    nextTitle = "",
-		    currentSpecial = self._szRoundElement,
-		    nextSpecial = "",
-		}
-	end
-	CustomGameEventManager:Send_ServerToAllClients( "wave_new_wave", event_data)
+	-- Do nothing.
 end
