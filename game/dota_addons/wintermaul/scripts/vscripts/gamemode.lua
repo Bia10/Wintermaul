@@ -112,9 +112,6 @@ function CWintermaulGameMode:onNPCSpawn( keys )
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_crystal_maiden" then
 			spawnedUnit:RemoveAbility("special_bonus_gold_income_15")
 		end
-
-		print(spawnedUnit:GetPlayerOwnerID(), " is owner of ", spawnedUnit:GetUnitName())
-		CustomGameEventManager:Send_ServerToAllClients("new_player", {id = spawnedUnit:GetPlayerOwnerID()})
 	end
 end
 
