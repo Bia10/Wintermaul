@@ -25,6 +25,7 @@ require('libraries/timers')
 require("wintermaul_game_round")
 require("wintermaul_game_spawner")
 require('gamemode')
+require('commands')
 
 --essential. loads the unit and model needed into memory
 function Precache( context )
