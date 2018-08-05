@@ -15,7 +15,7 @@ function ScoreAdd(id) {
 }
 
 function ScoreUpdate() {
-    var player_stats = CustomNetTables.GetAllTableValues("player_scores");
+    var player_stats = [];
     var player_ids = Game.GetAllPlayerIDs();
     for (var player_id in player_ids) {
         int_player_id = parseInt(player_id);
