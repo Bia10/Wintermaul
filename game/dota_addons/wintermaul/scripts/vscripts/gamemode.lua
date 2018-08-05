@@ -110,7 +110,7 @@ function CWintermaulGameMode:onNPCSpawn( keys )
 			end
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_crystal_maiden" then
-			spawnedUnit:RemoveAbility("special_bonus_gold_income_15")
+			spawnedUnit:RemoveAbility("special_bonus_gold_income_25")
 		end
 	end
 end
