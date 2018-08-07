@@ -14,7 +14,7 @@
 						<Label id="LifeText" text="Lives: "/>
 					</Panel>
 					<Panel class="LifeRight">
-						<Label id="LifeNumber" text="Pre-game"/>
+						<Label id="LifeNumber" text=""/>
 					</Panel>
 			</Panel>
 
@@ -23,7 +23,7 @@
 						<Label id="TimerText" text="Next wave will spawn in: "/>
 					</Panel>
 					<Panel class="TimerRight">
-						<Label id="TimerTime" text="Pre-game"/>
+						<Label id="TimerTime" text=""/>
 					</Panel>
 			</Panel>
 
@@ -32,7 +32,7 @@
 						<Label id="CurrentWaveTop" text="Wave:"/>
 					</Panel>
 					<Panel class="CurrentTopRight">
-						<Label id="CurrentWaveNumber" text="Pre-game"/>
+						<Label id="CurrentWaveNumber" text=""/>
 					</Panel>
 			</Panel>
 
@@ -41,7 +41,7 @@
 						<Label id="CurrentWaveBot" text="Current Wave:"/>
 					</Panel>
 					<Panel class="CurrentBotRight">
-						<Label id="CurrentWaveText" text="Pre-game"/>
+						<Label id="CurrentWaveText" text=""/>
 					</Panel>
 			</Panel>
 
