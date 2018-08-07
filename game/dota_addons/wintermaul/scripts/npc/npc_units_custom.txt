@@ -2285,7 +2285,7 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""			// Ability 1 creature_split_a
+		"Ability1"					""			// Ability 1 
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -2785,6 +2785,89 @@
 		"SoundSet"					"n_creep_Melee"
 		"Level"						"1"
 		"ModelScale" 					".9"
+		"IsNeutralUnitType"			"1"
+		"PathfindingSearchDepthScale" "0.5"
+		
+		
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"split_water_runner"			// Ability 1
+		"Ability2"					""			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"		// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"30"		// Damage range min.
+		"AttackDamageMax"			"30"		// Damage range max.	
+		"AttackRate"				"1.35"		// Speed of attack.
+		"AttackAnimationPoint"		"0.38"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"100"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.		   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"150"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"2"		// Gold earned min.
+		"BountyGoldMax"				"2"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"200"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1018"		// Base health.
+		"StatusMana"				"100"			// Base mana.
+		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"							// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		"creature"
+		{
+			"DisableClumpingBehavior"   "1"
+			"AttachWearables"
+			{
+				"Wearable1"	{ "ItemDef" "353" }
+				"Wearable2" { "ItemDef" "354" }
+				"Wearable3" { "ItemDef" "355" }
+				"Wearable4"	{ "ItemDef" "356" }
+			}
+		}
+	}
+	"npc_dota_wintermaul_water_runner_b"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/slark/slark.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"n_creep_Melee"
+		"Level"						"1"
+		"ModelScale" 					".6"
 		"IsNeutralUnitType"			"1"
 		"PathfindingSearchDepthScale" "0.5"
 		
@@ -3362,6 +3445,82 @@
 
 		// Abilities
 		//----------------------------------------------------------------
+		"Ability1"					"split_rock_elemental"			// Ability 1
+		"Ability2"					""			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"		// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"30"		// Damage range min.
+		"AttackDamageMax"			"30"		// Damage range max.	
+		"AttackRate"				"1.35"		// Speed of attack.
+		"AttackAnimationPoint"		"0.38"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"100"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.		   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"150"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"3"		// Gold earned min.
+		"BountyGoldMax"				"3"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"200"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"3909"		// Base health.
+		"StatusMana"				"100"			// Base mana.
+		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"							// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		"creature"
+		{
+			"DisableClumpingBehavior"   "1"
+		}
+	}
+	"npc_dota_wintermaul_rock_elemental_b"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"n_creep_Melee"
+		"Level"						"1"
+		"ModelScale" 					"0.6"
+		"IsNeutralUnitType"			"1"
+		"PathfindingSearchDepthScale" "0.5"
+		
+		
+
+		// Abilities
+		//----------------------------------------------------------------
 		"Ability1"					""			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
@@ -3923,6 +4082,90 @@
 		"SoundSet"					"n_creep_Melee"
 		"Level"						"1"
 		"ModelScale" 					"1"
+		"IsNeutralUnitType"			"1"
+		"PathfindingSearchDepthScale" "0.5"
+		
+		
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"split_high_mage"			// Ability 1
+		"Ability2"					""			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"		// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"1000"		// Damage range min.
+		"AttackDamageMax"			"1000"		// Damage range max.	
+		"AttackRate"				"1.35"		// Speed of attack.
+		"AttackAnimationPoint"		"0.38"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"100"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.		   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"150"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"4"		// Gold earned min.
+		"BountyGoldMax"				"4"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"200"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"8760"		// Base health.
+		"StatusMana"				"100"			// Base mana.
+		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"							// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		"creature"
+		{
+			"DisableClumpingBehavior"   "1"
+			"AttachWearables"
+			{
+			    "Wearable1" { "ItemDef" "252" }
+			    "Wearable2" { "ItemDef" "253" } 
+			    "Wearable3" { "ItemDef" "254" }
+			    "Wearable4" { "ItemDef" "255" }
+			    "Wearable5" { "ItemDef" "256" }
+			}
+		}
+	}
+	"npc_dota_wintermaul_high_mage_b"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/keeper_of_the_light/keeper_of_the_light.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"n_creep_Melee"
+		"Level"						"1"
+		"ModelScale" 					"0.5"
 		"IsNeutralUnitType"			"1"
 		"PathfindingSearchDepthScale" "0.5"
 		
@@ -4496,6 +4739,82 @@
 		"SoundSet"					"n_creep_Melee"
 		"Level"						"1"
 		"ModelScale" 					"1.3"
+		"IsNeutralUnitType"			"1"
+		"PathfindingSearchDepthScale" "0.5"
+		
+		
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"split_spider_fiend"			// Ability 1
+		"Ability2"					""			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"		// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"1000"		// Damage range min.
+		"AttackDamageMax"			"1000"		// Damage range max.	
+		"AttackRate"				"1.35"		// Speed of attack.
+		"AttackAnimationPoint"		"0.38"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"100"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.		   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"150"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"4"		// Gold earned min.
+		"BountyGoldMax"				"4"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"200"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"15571"		// Base health.
+		"StatusMana"				"100"			// Base mana.
+		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"							// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		"creature"
+		{
+			"DisableClumpingBehavior"   "1"
+		}
+	}
+	"npc_dota_wintermaul_spider_fiend_b"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/broodmother/spiderling.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"n_creep_Melee"
+		"Level"						"1"
+		"ModelScale" 					"0.8"
 		"IsNeutralUnitType"			"1"
 		"PathfindingSearchDepthScale" "0.5"
 		
