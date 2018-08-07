@@ -1616,7 +1616,8 @@
 			}
 		}
 	}
-	"creature_split_a"
+// ---- SPLITTER CODE ----
+	"split_water_runner"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
@@ -1632,16 +1633,26 @@
 
 		"OnOwnerDied"
 		{
-
 			"SpawnUnit"
 			{
-				"UnitName"				"npc_dota_wintermaul_engineers"
-				"UnitCount"				"3"
+				"UnitName"				"npc_dota_wintermaul_water_runner_b"
+				"UnitCount"				"2"
 				"SpawnRadius"			"50"
 				"GrantsGold"			"1"
 				"GrantsXP"				"1"
 				"OnSpawn"
 				{
+					"FireEffect"
+					{
+						"Target" "TARGET"
+						"EffectName" "particles/units/heroes/hero_life_stealer/life_stealer_infest_cast_mid.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectRadius" "100"
+						"EffectDurationScale" "1"
+						"EffectLifeDurationScale" "1"
+						"EffectColorA" "100 100 100"
+						"EffectColorB" "200 200 200"
+					}
 					"Knockback"
 					{
 						"Target"		"TARGET"
@@ -1654,5 +1665,148 @@
 			}
 		}
 	}
-	
+	"split_rock_elemental"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass" 					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"dark_seer_wall_of_replica"
+		
+		"precache"
+		{
+			"particle_folder"				"particles/creature_splitter"
+			"soundfile"					"soundevents/game_sounds/ability_split.vsndevts"
+		}
+
+		"OnOwnerDied"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"				"npc_dota_wintermaul_rock_elemental_b"
+				"UnitCount"				"2"
+				"SpawnRadius"			"50"
+				"GrantsGold"			"1"
+				"GrantsXP"				"1"
+				"OnSpawn"
+				{
+					"FireEffect"
+					{
+						"Target" "TARGET"
+						"EffectName" "particles/units/heroes/hero_life_stealer/life_stealer_infest_cast_mid.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectRadius" "100"
+						"EffectDurationScale" "1"
+						"EffectLifeDurationScale" "1"
+						"EffectColorA" "100 100 100"
+						"EffectColorB" "200 200 200"
+					}
+					"Knockback"
+					{
+						"Target"		"TARGET"
+						"Center"		"CASTER"
+						"Duration"		"0.75"
+						"Distance"		"275"
+						"Height"		"200"
+					}
+				}
+			}
+		}
+	}
+	"split_high_mage"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass" 					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"dark_seer_wall_of_replica"
+		
+		"precache"
+		{
+			"particle_folder"				"particles/creature_splitter"
+			"soundfile"					"soundevents/game_sounds/ability_split.vsndevts"
+		}
+
+		"OnOwnerDied"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"				"npc_dota_wintermaul_high_mage_b"
+				"UnitCount"				"3"
+				"SpawnRadius"			"50"
+				"GrantsGold"			"1"
+				"GrantsXP"				"1"
+				"OnSpawn"
+				{
+					"FireEffect"
+					{
+						"Target" "TARGET"
+						"EffectName" "particles/units/heroes/hero_life_stealer/life_stealer_infest_cast_mid.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectRadius" "100"
+						"EffectDurationScale" "1"
+						"EffectLifeDurationScale" "1"
+						"EffectColorA" "100 100 100"
+						"EffectColorB" "200 200 200"
+					}
+					"Knockback"
+					{
+						"Target"		"TARGET"
+						"Center"		"CASTER"
+						"Duration"		"0.75"
+						"Distance"		"275"
+						"Height"		"200"
+					}
+				}
+			}
+		}
+	}
+	"split_spider_fiend"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass" 					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"dark_seer_wall_of_replica"
+		
+		"precache"
+		{
+			"particle_folder"				"particles/creature_splitter"
+			"soundfile"					"soundevents/game_sounds/ability_split.vsndevts"
+		}
+
+		"OnOwnerDied"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"				"npc_dota_wintermaul_spider_fiend_b"
+				"UnitCount"				"4"
+				"SpawnRadius"			"50"
+				"GrantsGold"			"1"
+				"GrantsXP"				"1"
+				"OnSpawn"
+				{
+					"FireEffect"
+					{
+						"Target" "TARGET"
+						"EffectName" "particles/units/heroes/hero_life_stealer/life_stealer_infest_cast_mid.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectRadius" "100"
+						"EffectDurationScale" "1"
+						"EffectLifeDurationScale" "1"
+						"EffectColorA" "100 100 100"
+						"EffectColorB" "200 200 200"
+					}
+					"Knockback"
+					{
+						"Target"		"TARGET"
+						"Center"		"CASTER"
+						"Duration"		"0.75"
+						"Distance"		"275"
+						"Height"		"200"
+					}
+				}
+			}
+		}
+	}
 }
