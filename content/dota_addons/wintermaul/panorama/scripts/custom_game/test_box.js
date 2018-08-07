@@ -174,7 +174,6 @@ function SetLivesRemaining(lives_remaining)
 
 function OnGameStateChanged( table_name, key, data )
 {
-    $.Msg("Game state changed")
     if (key == "lives_remaining")
     {
         SetLivesRemaining(data);
