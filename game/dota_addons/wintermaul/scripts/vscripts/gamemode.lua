@@ -82,7 +82,19 @@ function CWintermaulGameMode:InitGameMode()
     -- Registering custom commands
     Convars:RegisterCommand( "wintermaul_set_round", function(...) return self:_SetRound( ... ) end, "Start playing a specific Wintermaul round", FCVAR_CHEAT )
     Convars:RegisterCommand( "wintermaul_set_lives_remaining", function(...) return self:_SetLivesRemaining( ... ) end, "Set the lives remaining for Wintermaul.", FCVAR_CHEAT )
-
+    
+    -- Setting default net-table values
+    CustomNetTables:SetTableValue("game_state", "round_time_to_start", {value = 'Pre-game'})
+    CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = 'Pre-game'})
+    CustomNetTables:SetTableValue("game_state", "round_wave_data", {
+                                                                    roundData = "Pre-game",
+                                                                    currentTitle = "Pre-game",
+                                                                    nextTitle = "Pre-game",
+                                                                    currentSpecial = "Pre-game",
+                                                                    nextSpecial = "Pre-game",
+		})
+    CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = "Pre-game", totalenemies = "Pre-game"})
+    
 	print( "Wintermaul is loaded." )
 end
 
