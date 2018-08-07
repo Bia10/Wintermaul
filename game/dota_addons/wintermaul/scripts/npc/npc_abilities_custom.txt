@@ -1630,13 +1630,20 @@
 			"particle_folder"				"particles/creature_splitter"
 			"soundfile"					"soundevents/game_sounds/ability_split.vsndevts"
 		}
-
+        "AbilitySpecial"
+        {
+            "01"
+            { 
+                "var_type"  "FIELD_INTEGER"
+                "unit_count" "2"
+            }
+        }
 		"OnOwnerDied"
 		{
 			"SpawnUnit"
 			{
 				"UnitName"				"npc_dota_wintermaul_water_runner_b"
-				"UnitCount"				"2"
+				"UnitCount"				"%unit_count"
 				"SpawnRadius"			"50"
 				"GrantsGold"			"1"
 				"GrantsXP"				"1"
@@ -1678,13 +1685,20 @@
 			"particle_folder"				"particles/creature_splitter"
 			"soundfile"					"soundevents/game_sounds/ability_split.vsndevts"
 		}
-
+        "AbilitySpecial"
+        {
+            "01"
+            { 
+                "var_type"  "FIELD_INTEGER"
+                "unit_count" "2"
+            }
+        }
 		"OnOwnerDied"
 		{
 			"SpawnUnit"
 			{
 				"UnitName"				"npc_dota_wintermaul_rock_elemental_b"
-				"UnitCount"				"2"
+				"UnitCount"				"%unit_count"
 				"SpawnRadius"			"50"
 				"GrantsGold"			"1"
 				"GrantsXP"				"1"
@@ -1726,13 +1740,20 @@
 			"particle_folder"				"particles/creature_splitter"
 			"soundfile"					"soundevents/game_sounds/ability_split.vsndevts"
 		}
-
+        "AbilitySpecial"
+        {
+            "01"
+            { 
+                "var_type"  "FIELD_INTEGER"
+                "unit_count" "3"
+            }
+        }
 		"OnOwnerDied"
 		{
 			"SpawnUnit"
 			{
 				"UnitName"				"npc_dota_wintermaul_high_mage_b"
-				"UnitCount"				"3"
+				"UnitCount"				"%unit_count"
 				"SpawnRadius"			"50"
 				"GrantsGold"			"1"
 				"GrantsXP"				"1"
@@ -1774,13 +1795,20 @@
 			"particle_folder"				"particles/creature_splitter"
 			"soundfile"					"soundevents/game_sounds/ability_split.vsndevts"
 		}
-
+        "AbilitySpecial"
+        {
+            "01"
+            { 
+                "var_type"  "FIELD_INTEGER"
+                "unit_count" "4"
+            }
+        }
 		"OnOwnerDied"
 		{
 			"SpawnUnit"
 			{
 				"UnitName"				"npc_dota_wintermaul_spider_fiend_b"
-				"UnitCount"				"4"
+				"UnitCount"				"%unit_count"
 				"SpawnRadius"			"50"
 				"GrantsGold"			"1"
 				"GrantsXP"				"1"
@@ -1809,4 +1837,31 @@
 			}
 		}
 	}
+    "stalker_evasion"
+    {
+        "BaseClass" 					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"phantom_assassin_blur"
+        "AbilitySpecial"
+        {
+            "01"
+            { 
+                "var_type"  "FIELD_FLOAT"
+                "evasion_value" "30"
+            }
+        }
+        "Modifiers"
+        {
+            "evasion"
+            {
+                "Passive"                   "1"
+                "IsHidden"                  "1"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_EVASION_CONSTANT"    "%evasion_value"
+                }
+
+            }
+        }
+    }
 }
