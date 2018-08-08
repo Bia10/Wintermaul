@@ -20,5 +20,4 @@ function killEntity(key)
             GameRules.CWintermaulGameMode:LifeLost()
         end
     end
-
 end
