@@ -50,7 +50,7 @@ function SetRoundWaveData(round_wave_data)
 	}
 	else if(currentspecial == "#DOTA_Wintermaul_Round_Element_Haste") //Haste lvls
 	{
-		currentwavetext.style.color = "blue";
+		currentwavetext.style.color = "#00C3FF";
 		//currentwavebot.style.color = "blue";
 
 		currentwavetext.text = ("( Haste )" + $.Localize( current ));
@@ -102,7 +102,7 @@ function SetRoundWaveData(round_wave_data)
 	}
 	else if(nextspecial == "#DOTA_Wintermaul_Round_Element_Haste") //Splitter lvls
 	{
-		nextwavetext.style.color = "blue";
+		nextwavetext.style.color = "#00C3FF";
 		//nextwave.style.color = "blue";
 
 		nextwavetext.text = ("( Haste )" + $.Localize( next ));
