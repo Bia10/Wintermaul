@@ -1125,8 +1125,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"sell_building"			// Ability 1.
-		"Ability2"					"splash_damage"		// Ability 2.
-		"Ability3"					"ability_tower"			// Ability 3.
+		"Ability2"					"ability_tower"			// Ability 2.
+		"Ability3"					""						// Ability 3.
 		"Ability4"					""						// Ability 4.
 		"Ability5"					""						// Ability 5.
 		"Ability6"					""						// Ability 6 - Extra.
@@ -2320,7 +2320,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
 
 		// Status
@@ -2411,7 +2411,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -2503,7 +2503,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -2590,7 +2590,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -2667,7 +2667,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -2745,7 +2745,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -2827,7 +2827,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -2910,7 +2910,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -2994,7 +2994,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3037,7 +3037,7 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"special_bonus_movement_speed_100"			// Ability 1
+		"Ability1"					"haste"			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -3072,7 +3072,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3158,7 +3158,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3242,7 +3242,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3291,7 +3291,7 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"creature_evasion"			// Ability 1
+		"Ability1"					"reptile_evasion"			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -3326,7 +3326,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3403,7 +3403,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3480,7 +3480,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3556,7 +3556,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3633,7 +3633,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3710,7 +3710,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3795,7 +3795,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3837,7 +3837,7 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"creature_evasion"			// Ability 1
+		"Ability1"					"corpse_evasion"			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -3872,7 +3872,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -3957,7 +3957,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4040,7 +4040,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4124,7 +4124,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4208,7 +4208,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4293,7 +4293,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4336,7 +4336,7 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"special_bonus_movement_speed_100"			// Ability 1
+		"Ability1"					"haste"			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -4371,7 +4371,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4456,7 +4456,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4533,7 +4533,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4575,7 +4575,7 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"creature_evasion"			// Ability 1
+		"Ability1"					"chieftain_evasion"			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -4610,7 +4610,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4695,7 +4695,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4781,7 +4781,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4857,7 +4857,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -4934,7 +4934,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
@@ -5014,7 +5014,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"200"		// Speed.
+		"MovementSpeed"				"140"		// Speed.
 
 		// Status
 		//----------------------------------------------------------------
