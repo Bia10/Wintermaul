@@ -499,7 +499,7 @@
 			"Corrupt Chieftains"
 			{
 				"NPCName"					"npc_dota_wintermaul_corrupt_chieftain"
-				"TotalUnitsToSpawn"			"90"
+				"TotalUnitsToSpawn"			"18"
 				"UnitsPerSpawn"				"1"
 				"SpawnInterval"				"1"
 			}
