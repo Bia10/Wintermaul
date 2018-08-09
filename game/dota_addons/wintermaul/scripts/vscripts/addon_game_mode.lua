@@ -28,13 +28,13 @@ require('gamemode')
 
 --essential. loads the unit and model needed into memory
 function Precache( context )
+
+	PrecacheUnitByNameSync("npc_dota_hero_elder_titan", context)
+	PrecacheResource("particle","particles/units/heroes/hero_elder_titan/elder_titan_echo_stomp_physical.vpcf", context)
 	-- Model ghost and grid particles
 	PrecacheResource("particle_folder", "particles/buildinghelper", context)
-	PrecacheUnitByNameSync("nature_pool", context)
-	PrecacheUnitByNameSync("terran_protector", context)
 	PrecacheItemByNameSync("item_apply_modifiers", context)
 	
-
 	--Fire towers
 	PrecacheUnitByNameSync("flare_tower", context)
 	PrecacheUnitByNameSync("flame_dancer", context)
