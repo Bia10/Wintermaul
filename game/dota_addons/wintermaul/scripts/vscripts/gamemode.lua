@@ -295,9 +295,12 @@ function CWintermaulGameMode:OnEntityKilled( event )
 	end
 end
 
-function CWintermaulGameMode:LifeLost()
-	self._nLivesLeft = self._nLivesLeft - 1
-	--print("Ouch! Lost one life! ", self._nLivesLeft, " lives remaining." )
+function CWintermaulGameMode:LifeLost(ammount)
+	if self._nLivesLeft - ammount < 0 then
+		self._nLivesLeft = 0
+	else
+		self._nLivesLeft = self._nLivesLeft - ammount
+	end
 
 	CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = string.format("%d", self._nLivesLeft)})
 
