@@ -1582,7 +1582,7 @@
 				"Attributes"		"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE | MODIFIER_ATTRIBUTE_PERMANENT"	
 				"States"
 				{
-					"MODIFIER_STATE_MAGIC_IMMUNE" "MODIFIER_STATE_VALUE_ENABLED" // Makes most abilities don't affect this. Use custom damage
+					"MODIFIER_STATE_MAGIC_IMMUNE" "MODIFIER_STATE_VALUE_DISABLED" // Makes most abilities don't affect this. Use custom damage
 					"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED" // Prevents moving
 					"MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED" // Allows attacking own buildings
 					"MODIFIER_STATE_LOW_ATTACK_PRIORITY" "MODIFIER_STATE_VALUE_ENABLED" // Makes it a secondary target when A-clicking ground
@@ -1968,6 +1968,86 @@
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"    "%speed_value"
+                }
+            }
+        }
+    }
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//// Boss abilities -----------------------------------------------------------------------------------------
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	"chieftain_stomp"
+    {
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityTextureName"            "elder_titan_echo_stomp"
+        "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityCastAnimation"          "ACT_DOTA_CAST_ABILITY_1"
+        "AbilitySpecial"
+        {
+            "01"
+            { 
+                "var_type"  "FIELD_FLOAT"
+                "channel_time" "1.6"
+            }            
+            "02"
+            { 
+                "var_type"  "FIELD_FLOAT"
+                "stun_time" "5"
+            }
+            "03"
+            {
+                "var_type"  "FIELD_FLOAT"
+                "stomp_radius"  "100"
+            }
+        }
+        "AbilityChannelTime"    "%channel_time"
+		"OnSpellStart"
+		{
+			"FireSound"
+			{
+				"EffectName"	"Hero_ElderTitan.EchoStomp.Channel"
+				"Target"
+				{
+					"Center"	"UNIT"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+				}
+			}
+		}
+        "OnChannelSucceeded"
+        {
+			"FireSound"
+            {
+                "EffectName"    "Hero_ElderTitan.EchoStomp"
+                "Target"
+				{
+					"Center"	"UNIT"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+				}
+            }
+			"FireEffect"
+            {
+                "Target"			"CASTER"
+                "EffectName"        "particles/units/heroes/hero_elder_titan/elder_titan_echo_stomp_physical.vpcf"
+				"EffectAttachType"	"follow_origin"
+            }
+
+            "ActOnTargets"
+            {
+                "Target"
+                {
+                    "Center"    "CASTER"
+                    "Radius"    "%stomp_radius"
+                    "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                    "Types"     "DOTA_UNIT_TARGET_ALL"
+                }
+                "Action"
+                {
+                    "Stun"
+                    {
+                        "Duration" "%stun_time"
+                        "Target" "TARGET"
+                    }
                 }
             }
         }
