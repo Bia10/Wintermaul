@@ -17,7 +17,15 @@ function killEntity(key)
             GameRules.CWintermaulGameMode:GetCurrentRound():OnEntityRemoved(key)
             EmitGlobalSound("DOTA_Item.Armlet.DeActivate")
             UTIL_Remove(key)
-            GameRules.CWintermaulGameMode:LifeLost()
+
+            --Boss logic for loosing more lives when leaking
+            if unitName == "npc_dota_wintermaul_corrupt_chieftain" then
+                GameRules.CWintermaulGameMode:LifeLost(10)
+            elseif unitName == "npc_dota_wintermaul_duke_wintermaul" then
+                GameRules.CWintermaulGameMode:LifeLost(100)
+            else
+                GameRules.CWintermaulGameMode:LifeLost(1)
+            end
         end
     end
 end
