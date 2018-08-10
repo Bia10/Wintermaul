@@ -146,10 +146,22 @@
 			"round_title"				"#DOTA_Wintermaul_Round_Scouts_Title"
 			"round_description"			"#DOTA_Wintermaul_Round_Scouts_Description"
 			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+            "SpawnAt"
+            {
+                "red_spawn_1"           "true"
+                "blue_spawn_1"          "true"
+                "teal_spawn_1"          "true"
+                "orange_spawn_1"        "true"
+                "yellow_spawn_1"        "true"
+                "purple_spawn_1"        "true"
+                "green_spawn_1"         "true"
+                "grey_spawn_1"          "true"
+                "pink_spawn_1"          "true"
+            }
 			"Scouts"
 			{
 				"NPCName"					"npc_dota_wintermaul_scouts"
-				"TotalUnitsToSpawn"			"90"
+				"TotalUnitsToSpawn"			"9"
 				"UnitsPerSpawn"				"1"
 				"SpawnInterval"				"1"
                 "SpawnWhenNextDies"         "true"

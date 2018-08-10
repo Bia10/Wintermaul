@@ -13,34 +13,26 @@ function CWintermaulGameRound:ReadConfiguration( kv, gameMode, roundNumber )
 	self._szRoundQuestTitle = "#DOTA_Quest_Wintermaul_Round_Subtext"
 	self._szRoundTitle = kv.round_title or string.format( "Round%d", roundNumber )
 	self._szRoundElement = kv.round_special
-
+    
+    self._vSpawnAt = kv.SpawnAt or {}
 	self._vSpawners = {}
 	
 	for k, v in pairs( kv ) do
 		if type( v ) == "table" and v.NPCName then
-			if v.SpawnerName or v.PossibleSpawns then
-				local spawner = CWintermaulGameSpawner()
-				spawner:ReadConfiguration( k, v, self )
-				self._vSpawners[k] = spawner
-			else
-				-- No spawner specified; create other spawners for each specified in map config.
-				local totalUnitsForWave = v.TotalUnitsToSpawn
-				local totalUnitsSpawned = 0
-				
-				local idealNumberOfUnitsToSpawn = math.ceil(v.TotalUnitsToSpawn/#self._gameMode._vSpawnsList)
-				for i = 1,#self._gameMode._vSpawnsList do
-					vv = self._gameMode._vSpawnsList[i]
-
-					v.TotalUnitsToSpawn = math.min(idealNumberOfUnitsToSpawn, totalUnitsForWave - totalUnitsSpawned)
-					v.SpawnerName = vv.szSpawnerName
-					
-					local spawner = CWintermaulGameSpawner()
-					spawner:ReadConfiguration( k, v, self )
-					self._vSpawners[vv.szSpawnerName] = spawner
-					
-					totalUnitsSpawned = totalUnitsSpawned + v.TotalUnitsToSpawn
-				end
-			end
+            local totalUnitsForWave = v.TotalUnitsToSpawn
+            local totalUnitsSpawned = 0
+            local idealNumberOfUnitsToSpawn = math.ceil(v.TotalUnitsToSpawn/#self._gameMode._vSpawnsList)
+            for i = 1,#self._gameMode._vSpawnsList do
+                vv = self._gameMode._vSpawnsList[i]
+                if self._vSpawnAt[vv.szSpawnerName] then
+                    v.TotalUnitsToSpawn = math.min(idealNumberOfUnitsToSpawn, totalUnitsForWave - totalUnitsSpawned)
+                    v.SpawnerName = vv.szSpawnerName
+                    local spawner = CWintermaulGameSpawner()
+                    spawner:ReadConfiguration( k, v, self )
+                    self._vSpawners[vv.szSpawnerName] = spawner
+                    totalUnitsSpawned = totalUnitsSpawned + v.TotalUnitsToSpawn
+                end
+            end
 		end
 	end
 

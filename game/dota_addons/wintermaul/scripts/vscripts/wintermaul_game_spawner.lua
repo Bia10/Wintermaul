@@ -31,32 +31,9 @@ function CWintermaulGameSpawner:ReadConfiguration( name, kv, gameRound )
 	self._bDontOffsetSpawn = ( tonumber( kv.DontOffsetSpawn or 0 ) ~= 0 )
     self._bSpawnWhenNextDies = ( tonumber( kv.SpawnWhenNextDies or 0 ) ~= 0 )
     
-	if kv.PossibleSpawns ~= nil then
-		self:_LoadPossibleSpawns( kv.PossibleSpawns )
-	end
     self._vAliveSpawnedUnits = {}
     
     
-end
-
-function CWintermaulGameSpawner:_LoadPossibleSpawns( kvSpawns )
-	vPossibleSpawnsNames = {}
-	self._vPossibleSpawns = {}
-	if type( kvSpawns ) == "table" then
-		local i
-		while true do
-			i = #vPossibleSpawnsNames + 1
-			if kvSpawns[string.format(i)] == nil then
-				break
-			end
-			table.insert(vPossibleSpawnsNames, kvSpawns[string.format(i)])
-		end
-	else
-		print("its not a table")
-	end
-	for k,v in pairs( vPossibleSpawnsNames ) do
-		table.insert(self._vPossibleSpawns, self:_SearchSpawnTable(v))
-	end
 end
 
 function CWintermaulGameSpawner:_SearchSpawnTable( sSpawnName )
@@ -161,7 +138,7 @@ end
 
 
 function CWintermaulGameSpawner:Think()
-	if not self._flNextSpawnTime or (self._bSpawnWhenNextDies and self:AreThereSpawnedUnitsAlive())then
+	if not self._flNextSpawnTime or (self._bSpawnWhenNextDies and self:AreThereSpawnedUnitsAlive()) then
 		return
 	end
 
@@ -215,12 +192,7 @@ function CWintermaulGameSpawner:_UpdateSpawn( index )
 end
 
 function CWintermaulGameSpawner:_GetSpawnerInfoByIndex( index )
-	local spawnInfo
-	if self._vPossibleSpawns == nil then
-		spawnInfo = self._gameRound._gameMode._vSpawnsList[ index ]
-	else
-		spawnInfo = self._vPossibleSpawns[ index ]
-	end
+	local spawnInfo = self._gameRound._gameMode._vSpawnsList[ index ]
 	if spawnInfo == nil then
 		print( string.format( "Failed to get random spawn info for spawner %s.", self._szName ) )
 		return
