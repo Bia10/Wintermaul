@@ -12,6 +12,9 @@ function CWintermaulGameMode:InitGameMode()
 	self._nCurrentSpawnerID = 1
 	self._nLivesLeft = 40
 	self._diff = {}
+	self._diff["hp"] = 1
+	self._diff["lives"] = 40
+
 	self:_ReadGameConfiguration()
 	self._szMainQuestTitle = "#DOTA_Quest_Wintermaul_Main_Title"
 
@@ -34,8 +37,7 @@ function CWintermaulGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesOverride( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesVisible( false )
 	GameRules:GetGameModeEntity():SetFogOfWarDisabled ( true )
-	--GameRules:GetGameModeEntity():SetCustomHeroMaxLevel( 1 )
-	--GameRules:GetGameModeEntity():SetUseCustomHeroLevels ( true )
+
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.25 )
 	GameRules:GetGameModeEntity():SetCameraDistanceOverride(1300)
 
@@ -51,8 +53,7 @@ function CWintermaulGameMode:InitGameMode()
 			self._diff["hp"] = args["hp"]
 			self._diff["lives"] = args["lives"]
 			self._nLivesLeft = self._diff["lives"]
-			self._diff["endless"] = args["endless"] --use this to loop the rounds if selected, either 1/0
-			print("endless mode?", self._diff["endless"])
+			self._diff["endless"] = args["endless"] --use this to activate endless mode
 			CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = string.format("%d", args["lives"])})
 		end 
 	)
@@ -190,6 +191,8 @@ function CWintermaulGameMode:OnGameRulesStateChange()
 	if nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		self._flPrepTimeEnd = GameRules:GetGameTime() + self._flPrepTimeBetweenRounds
 	end
+
+	--insert ui element for 
 end
 
 -- sets ability points to 0 and sets skills to lvl1 at start.
@@ -197,7 +200,11 @@ function CWintermaulGameMode:OnPlayerPicked( keys )
 
 	local player = EntIndexToHScript(keys.player)
 	for nPlayerID = 0, DOTA_MAX_PLAYERS-1 do
-		PlayerResource:SetGold(nPlayerID, 100, false)
+		if nPlayerID == 0 then
+			PlayerResource:SetGold(nPlayerID, 150, false)
+		else
+			PlayerResource:SetGold(nPlayerID, 100, false)
+		end
 	end
 end
 
@@ -215,7 +222,14 @@ function CWintermaulGameMode:_ThinkPrepTime()
 			return false
 		end
 		self._currentRound = self._vRounds[ self._nRoundNumber ]
-		self._currentRound:Begin()
+
+
+		-- should get from ._currentRound tbh -------------------------------- Use this to dictate what rounds get special treatment?
+		if self._nRoundNumber == 30 then
+			self._currentRound:BeginSpecial()
+		else
+			self._currentRound:Begin()
+		end
 		return
 	end
 
