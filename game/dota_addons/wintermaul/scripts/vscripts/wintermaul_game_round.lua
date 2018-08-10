@@ -57,6 +57,10 @@ function CWintermaulGameRound:Precache()
 	end
 end
 
+function CWintermaulGameRound:BeginSpecial()
+	-- load this one instead of Begin() to do cool things
+	print("using custom rules for this round!")
+end
 
 function CWintermaulGameRound:Begin()
 
@@ -64,7 +68,7 @@ function CWintermaulGameRound:Begin()
 	local nextRoundNumber = self._nRoundNumber+1
 	local nextRound = self._gameMode._vRounds[self._nRoundNumber+1]
 
-	--Difficulty block bois
+	--[[Difficulty block bois
 	if next(self._gameMode._diff) == nil then
 		print("Difficulty not selected, defaulting to normal.")  -- TODO this is a repeat of code, need a seperate file that stores the configuration of difficulties
 		self._gameMode._diff["hp"] = 1
@@ -73,7 +77,7 @@ function CWintermaulGameRound:Begin()
 		self._gameMode._nLivesLeft = self._gameMode._diff["lives"]
 		CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = string.format("%d", self._gameMode._nLivesLeft)})
 	end
-
+	]]
 
 	if nextRoundNumber <= #self._gameMode._vRounds then
 		event_data =
@@ -120,6 +124,7 @@ function CWintermaulGameRound:Begin()
 	end
 	self._nCoreUnitsKilled = 0
 
+	--DEPRECATED PROBABLY?
 	self._entQuest = SpawnEntityFromTableSynchronous( "quest", {
 		name = self._szRoundTitle,
 		title =  self._szRoundQuestTitle
@@ -156,6 +161,7 @@ function CWintermaulGameRound:End()
 		spawner:End()
 	end
 
+	--DEPRECATED PROBABLY
 	if self._entQuest then
 		UTIL_Remove( self._entQuest )
 		self._entQuest = nil
@@ -165,7 +171,11 @@ function CWintermaulGameRound:End()
 	local nRoundCompletionGoldReward = self._nRoundNumber*5+20
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 		if PlayerResource:HasSelectedHero( nPlayerID ) then
-			PlayerResource:ModifyGold( nPlayerID, nRoundCompletionGoldReward, false, DOTA_ModifyGold_Unspecified )
+			if nPlayerID == 0 then
+				PlayerResource:ModifyGold( nPlayerID, nRoundCompletionGoldReward+50, false, DOTA_ModifyGold_Unspecified )
+			else
+				PlayerResource:ModifyGold( nPlayerID, nRoundCompletionGoldReward, false, DOTA_ModifyGold_Unspecified )
+			end
 		end
 	end
 
@@ -197,7 +207,7 @@ function CWintermaulGameRound:Think()
 	end
 end
 
-
+-- is this used?
 function CWintermaulGameRound:IsFinished()
 	for _, spawner in pairs( self._vSpawners ) do
 		if not spawner:IsFinishedSpawning() then
@@ -232,7 +242,7 @@ function CWintermaulGameRound:OnNPCSpawned( event )
 	end
 end
 
-
+--Units die in lane
 function CWintermaulGameRound:OnEntityKilled( event )
 	local killedUnit = EntIndexToHScript( event.entindex_killed )
 	if not killedUnit then
@@ -260,6 +270,7 @@ function CWintermaulGameRound:OnEntityKilled( event )
 	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", #self._vEnemiesRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
+--Units reach the end
 function CWintermaulGameRound:OnEntityRemoved( event )
 
 	for i, unit in pairs( self._vEnemiesRemaining ) do
@@ -267,11 +278,12 @@ function CWintermaulGameRound:OnEntityRemoved( event )
 			table.remove( self._vEnemiesRemaining, i )
 			break
 		end
-	end	
-
+	end
 	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", #self._vEnemiesRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
+--[[
+Up for deletion?
 function CWintermaulGameRound:StatusReport( )
 	print( string.format( "Enemies remaining: %d", #self._vEnemiesRemaining ) )
 	for _,e in pairs( self._vEnemiesRemaining ) do
@@ -290,3 +302,4 @@ end
 function CWintermaulGameRound:OnPlayerReconnect()
 	-- Do nothing.
 end
+]]
