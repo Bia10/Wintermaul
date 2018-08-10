@@ -152,6 +152,8 @@
 				"TotalUnitsToSpawn"			"90"
 				"UnitsPerSpawn"				"1"
 				"SpawnInterval"				"1"
+                "SpawnWhenNextDies"         "true"
+                "RandomSpawning"            "true"
 			}
 		}
 

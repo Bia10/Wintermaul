@@ -26,14 +26,17 @@ function CWintermaulGameSpawner:ReadConfiguration( name, kv, gameRound )
 	self._flChampionChance = tonumber( kv.ChampionChance or 0 )
 	self._flInitialWait = tonumber( kv.WaitForTime or 0 )
 	self._flSpawnInterval = tonumber( kv.SpawnInterval or 0 )
-
+    
 	self._bDontGiveGoal = ( tonumber( kv.DontGiveGoal or 0 ) ~= 0 )
 	self._bDontOffsetSpawn = ( tonumber( kv.DontOffsetSpawn or 0 ) ~= 0 )
-
+    self._bSpawnWhenNextDies = ( tonumber( kv.SpawnWhenNextDies or 0 ) ~= 0 )
+    
 	if kv.PossibleSpawns ~= nil then
 		self:_LoadPossibleSpawns( kv.PossibleSpawns )
 	end
-
+    self._vAliveSpawnedUnits = {}
+    
+    
 end
 
 function CWintermaulGameSpawner:_LoadPossibleSpawns( kvSpawns )
@@ -147,9 +150,18 @@ function CWintermaulGameSpawner:ParentSpawned( parentSpawner )
 	end
 end
 
+function CWintermaulGameSpawner:AreThereSpawnedUnitsAlive()
+    for k,v in pairs(self._vAliveSpawnedUnits) do
+        if v:IsNull() then
+            table.remove(self._vAliveSpawnedUnits, k)
+        end
+    end
+    return #self._vAliveSpawnedUnits > 0
+end
+
 
 function CWintermaulGameSpawner:Think()
-	if not self._flNextSpawnTime then
+	if not self._flNextSpawnTime or (self._bSpawnWhenNextDies and self:AreThereSpawnedUnitsAlive())then
 		return
 	end
 
@@ -274,7 +286,7 @@ function CWintermaulGameSpawner:_DoSpawn()
 		local vSpawnLocation = vBaseSpawnLocation
 
 		local entUnit = CreateUnitByName( szNPCClassToSpawn, vSpawnLocation, true, nil, nil, DOTA_TEAM_BADGUYS )
-
+        table.insert(self._vAliveSpawnedUnits, entUnit)
 		entUnit:SetMaxHealth(entUnit:GetMaxHealth() * self._gameRound._gameMode._diff["hp"])
 
 
