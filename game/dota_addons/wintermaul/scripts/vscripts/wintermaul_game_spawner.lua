@@ -191,6 +191,10 @@ function CWintermaulGameSpawner:_UpdateSpawn( index )
 	self:_GetSpawnerInfoByIndex(index)
 end
 
+function CWintermaulGameSpawner:IsSpawningFinished()
+    return self._nTotalUnitsToSpawn == self._nUnitsSpawnedThisRound
+end
+
 function CWintermaulGameSpawner:_GetSpawnerInfoByIndex( index )
 	local spawnInfo = self._gameRound._gameMode._vSpawnsList[ index ]
 	if spawnInfo == nil then

@@ -16,7 +16,8 @@ function CWintermaulGameRound:ReadConfiguration( kv, gameMode, roundNumber )
     
     self._vSpawnAt = kv.SpawnAt or {}
 	self._vSpawners = {}
-	
+	self._bGroupSpawners = kv.GroupSpawners
+    
 	for k, v in pairs( kv ) do
 		if type( v ) == "table" and v.NPCName then
             local totalUnitsForWave = v.TotalUnitsToSpawn
@@ -194,9 +195,19 @@ end
 
 
 function CWintermaulGameRound:Think()
-	for _, spawner in pairs( self._vSpawners ) do -- For each unit in a spawner
-		spawner:Think()
-	end
+    if self._bGroupSpawners then
+        for _, spawner in pairs( self._vSpawners ) do
+            --Doesnt work, each spawner needs to be considerate of others
+            if not spawner:IsSpawningFinished() and not spawner:AreThereSpawnedUnitsAlive() then
+                spawner:Think()
+                return
+            end
+        end
+    else
+        for _, spawner in pairs( self._vSpawners ) do
+            spawner:Think()
+        end
+    end
 end
 
 -- is this used?

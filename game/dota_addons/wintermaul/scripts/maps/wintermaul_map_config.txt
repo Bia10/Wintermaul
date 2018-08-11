@@ -146,6 +146,7 @@
 			"round_title"				"#DOTA_Wintermaul_Round_Scouts_Title"
 			"round_description"			"#DOTA_Wintermaul_Round_Scouts_Description"
 			"round_special"				"#DOTA_Wintermaul_Round_Element_Normal"
+            "GroupSpawners"             "true"
             "SpawnAt"
             {
                 "red_spawn_1"           "true"
