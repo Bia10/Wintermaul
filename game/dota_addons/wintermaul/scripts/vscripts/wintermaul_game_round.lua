@@ -119,6 +119,7 @@ function CWintermaulGameRound:Begin()
 		spawner:Begin()
 		self._nCoreUnitsTotal = self._nCoreUnitsTotal + spawner:GetTotalUnitsToSpawn()
 	end
+    self._nCoreUnitsRemaining = self._nCoreUnitsTotal
 	self._nCoreUnitsKilled = 0
 
 	--DEPRECATED PROBABLY?
@@ -214,7 +215,6 @@ function CWintermaulGameRound:Think()
     end
 end
 
--- is this used?
 function CWintermaulGameRound:IsFinished()
 	for _, spawner in pairs( self._vSpawners ) do
 		if not spawner:IsFinishedSpawning() then
@@ -270,11 +270,12 @@ function CWintermaulGameRound:OnEntityKilled( event )
 		local playerStats = self._vPlayerStats[ playerID ]
 		if playerStats then
 			playerStats.nCreepsKilled = playerStats.nCreepsKilled + 1
-			CustomGameEventManager:Send_ServerToAllClients("new_score", { id = playerID})
+			CustomGameEventManager:Send_ServerToAllClients("new_score", { id = playerID })
 		end
 	end
-
-	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", #self._vEnemiesRemaining), totalenemies = self._nCoreUnitsTotal})
+    
+    self._nCoreUnitsRemaining = self._nCoreUnitsRemaining - 1
+	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", self._nCoreUnitsRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
 --Units reach the end
@@ -286,7 +287,8 @@ function CWintermaulGameRound:OnEntityRemoved( event )
 			break
 		end
 	end
-	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", #self._vEnemiesRemaining), totalenemies = self._nCoreUnitsTotal})
+    self._nCoreUnitsRemaining = self._nCoreUnitsRemaining - 1
+	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", self._nCoreUnitsRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
 --[[
