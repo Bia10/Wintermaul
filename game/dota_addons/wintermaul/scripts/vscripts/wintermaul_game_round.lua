@@ -14,7 +14,12 @@ function CWintermaulGameRound:ReadConfiguration( kv, gameMode, roundNumber )
 	self._szRoundTitle = kv.round_title or string.format( "Round%d", roundNumber )
 	self._szRoundElement = kv.round_special
     
-    self._vSpawnAt = kv.SpawnAt or {}
+    local spawnerNames = {}
+    for i = 1,#self._gameMode._vSpawnsList do
+        spawnerNames[self._gameMode._vSpawnsList[i].szSpawnerName] = true
+    end
+    self._vSpawnAt = kv.SpawnAt or spawnerNames
+    
 	self._vSpawners = {}
 	self._bGroupSpawners = kv.GroupSpawners
     
@@ -23,14 +28,13 @@ function CWintermaulGameRound:ReadConfiguration( kv, gameMode, roundNumber )
             local totalUnitsForWave = v.TotalUnitsToSpawn
             local totalUnitsSpawned = 0
             local idealNumberOfUnitsToSpawn = math.ceil(v.TotalUnitsToSpawn/#self._gameMode._vSpawnsList)
-            for i = 1,#self._gameMode._vSpawnsList do
-                vv = self._gameMode._vSpawnsList[i]
-                if self._vSpawnAt[vv.szSpawnerName] then
+            for spawnerName, bSpawn in pairs(self._vSpawnAt) do
+                if self._vSpawnAt[spawnerName] then
                     v.TotalUnitsToSpawn = math.min(idealNumberOfUnitsToSpawn, totalUnitsForWave - totalUnitsSpawned)
-                    v.SpawnerName = vv.szSpawnerName
+                    v.SpawnerName = spawnerName
                     local spawner = CWintermaulGameSpawner()
                     spawner:ReadConfiguration( k, v, self )
-                    self._vSpawners[vv.szSpawnerName] = spawner
+                    self._vSpawners[spawnerName] = spawner
                     totalUnitsSpawned = totalUnitsSpawned + v.TotalUnitsToSpawn
                 end
             end
@@ -197,8 +201,8 @@ end
 function CWintermaulGameRound:Think()
     if self._bGroupSpawners then
         for _, spawner in pairs( self._vSpawners ) do
-            --Doesnt work, each spawner needs to be considerate of others
-            if not spawner:IsSpawningFinished() and not spawner:AreThereSpawnedUnitsAlive() then
+            --If any spawner has finished spawning
+            if not spawner:IsSpawningFinished() or spawner:AreThereSpawnedUnitsAlive() then
                 spawner:Think()
                 return
             end
