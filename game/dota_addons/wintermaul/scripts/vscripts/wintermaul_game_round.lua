@@ -54,11 +54,6 @@ function CWintermaulGameRound:Precache()
 	end
 end
 
-function CWintermaulGameRound:BeginSpecial()
-	-- load this one instead of Begin() to do cool things
-	print("using custom rules for this round!")
-end
-
 function CWintermaulGameRound:Begin()
 
 	local event_data --hellyeah
