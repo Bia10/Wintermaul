@@ -31,6 +31,8 @@ function Precache( context )
 
 	PrecacheUnitByNameSync("npc_dota_hero_elder_titan", context)
 	PrecacheResource("particle","particles/units/heroes/hero_elder_titan/elder_titan_echo_stomp_physical.vpcf", context)
+	PrecacheUnitByNameSync("npc_dota_hero_abaddon", context)
+	PrecacheResource("particle","particles/econ/items/abaddon/abaddon_alliance/abaddon_aphotic_shield_alliance_explosion.vpcf", context)
 	-- Model ghost and grid particles
 	PrecacheResource("particle_folder", "particles/buildinghelper", context)
 	PrecacheItemByNameSync("item_apply_modifiers", context)
