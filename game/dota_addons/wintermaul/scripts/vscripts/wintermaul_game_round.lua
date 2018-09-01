@@ -59,21 +59,11 @@ function CWintermaulGameRound:Begin()
 	local event_data
 	local nextRoundNumber = self._nRoundNumber + 1
 	local nextRound = self._gameMode._vRounds[self._nRoundNumber + 1]
-    
+
     self._vEnemiesRemaining = {}
     self._nUnitsTotal = 0
     self._vPlayerStats = {}
-    
-	--[[Difficulty block bois
-	if next(self._gameMode._diff) == nil then
-		print("Difficulty not selected, defaulting to normal.")  -- TODO this is a repeat of code, need a seperate file that stores the configuration of difficulties
-		self._gameMode._diff["hp"] = 1
-		self._gameMode._diff["lives"] = 40
-		CustomGameEventManager:Send_ServerToAllClients("diff_default", {})
-		self._gameMode._nLivesLeft = self._gameMode._diff["lives"]
-		CustomNetTables:SetTableValue("game_state", "lives_remaining", {value = string.format("%d", self._gameMode._nLivesLeft)})
-	end
-	]]
+
 
 	if nextRoundNumber <= #self._gameMode._vRounds then
 		event_data =
@@ -87,12 +77,13 @@ function CWintermaulGameRound:Begin()
 	else
 		event_data =
 		{
-			roundData = nextRoundNumber,
+			roundData = self._nRoundNumber,
 		    currentTitle = self._szRoundTitle,
 		    nextTitle = "",
 		    currentSpecial = self._szRoundElement,
 		    nextSpecial = "",
 		}
+		print(nextRoundNumber)
 	end
     
     CustomNetTables:SetTableValue("game_state", "round_wave_data", event_data)
