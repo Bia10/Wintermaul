@@ -1,6 +1,6 @@
 function Spawn( entityKeyValues )
 	ABILITY_stun = thisEntity:FindAbilityByName( "chieftain_stomp" )
-	math.randomseed(1234)
+	--math.randomseed(GameRules:GetGameTime())
 	EmitGlobalSound("Hero_ElderTitan.EchoStomp")
 	EmitGlobalSound("elder_titan_elder_levelup_15")
 	thisEntity:SetContextThink( "ChieftainThink", ChieftainThink, 14 )
