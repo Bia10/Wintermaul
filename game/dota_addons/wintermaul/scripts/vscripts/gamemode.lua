@@ -225,11 +225,7 @@ function CWintermaulGameMode:_ThinkPrepTime()
 
 
 		-- should get from ._currentRound tbh -------------------------------- Use this to dictate what rounds get special treatment?
-		if self._nRoundNumber == 30 then
-			self._currentRound:BeginSpecial()
-		else
-			self._currentRound:Begin()
-		end
+		self._currentRound:Begin()
 		return
 	end
 
