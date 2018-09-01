@@ -56,10 +56,14 @@ end
 
 function CWintermaulGameRound:Begin()
 
-	local event_data --hellyeah
-	local nextRoundNumber = self._nRoundNumber+1
-	local nextRound = self._gameMode._vRounds[self._nRoundNumber+1]
-
+	local event_data
+	local nextRoundNumber = self._nRoundNumber + 1
+	local nextRound = self._gameMode._vRounds[self._nRoundNumber + 1]
+    
+    self._vEnemiesRemaining = {}
+    self._nUnitsTotal = 0
+    self._vPlayerStats = {}
+    
 	--[[Difficulty block bois
 	if next(self._gameMode._diff) == nil then
 		print("Difficulty not selected, defaulting to normal.")  -- TODO this is a repeat of code, need a seperate file that stores the configuration of difficulties
@@ -90,50 +94,26 @@ function CWintermaulGameRound:Begin()
 		    nextSpecial = "",
 		}
 	end
+    
     CustomNetTables:SetTableValue("game_state", "round_wave_data", event_data)
-
-	self._vEnemiesRemaining = {}
+	
 	self._vEventHandles = {
 		ListenToGameEvent( "npc_spawned", Dynamic_Wrap( CWintermaulGameRound, "OnNPCSpawned" ), self ),
 		ListenToGameEvent( "entity_killed", Dynamic_Wrap( CWintermaulGameRound, "OnEntityKilled" ), self ),
 		ListenToGameEvent( "player_reconnected", Dynamic_Wrap(CWintermaulGameRound, "OnPlayerReconnect"), self)
-
 	}
-
-
-	self._vPlayerStats = {}
+    
+	
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 		-- Put player stats here
-		self._vPlayerStats[ nPlayerID ] = {
-			nCreepsKilled = 0,
-		}
+		self._vPlayerStats[ nPlayerID ] = { nCreepsKilled = 0 }
 	end
-
-	self._nCoreUnitsTotal = 0
+    
+    self._nCoreUnitsTotal = 0
 	for _, spawner in pairs( self._vSpawners ) do
 		spawner:Begin()
 		self._nCoreUnitsTotal = self._nCoreUnitsTotal + spawner:GetTotalUnitsToSpawn()
 	end
-    self._nCoreUnitsRemaining = self._nCoreUnitsTotal
-	self._nCoreUnitsKilled = 0
-
-	--DEPRECATED PROBABLY?
-	self._entQuest = SpawnEntityFromTableSynchronous( "quest", {
-		name = self._szRoundTitle,
-		title =  self._szRoundQuestTitle
-	})
-	self._entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_ROUND, self._nRoundNumber )
-	self._entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, self._nCoreUnitsTotal )
-
-	self._entKillCountSubquest = SpawnEntityFromTableSynchronous( "subquest_base", {
-		show_progress_bar = true,
-		progress_bar_hue_shift = -119
-	} )
-	self._entQuest:AddSubquest( self._entKillCountSubquest )
-	self._entKillCountSubquest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, self._nCoreUnitsTotal )
-
-	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = self._nCoreUnitsTotal, totalenemies = self._nCoreUnitsTotal})
-
 end
 
 
@@ -162,10 +142,10 @@ function CWintermaulGameRound:End()
 	end
 
 	local nRoundCompletionGoldReward = self._nRoundNumber*5+20
-	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
 		if PlayerResource:HasSelectedHero( nPlayerID ) then
 			if nPlayerID == 0 then
-				PlayerResource:ModifyGold( nPlayerID, nRoundCompletionGoldReward+50, false, DOTA_ModifyGold_Unspecified )
+				PlayerResource:ModifyGold( nPlayerID, nRoundCompletionGoldReward + 50, false, DOTA_ModifyGold_Unspecified )
 			else
 				PlayerResource:ModifyGold( nPlayerID, nRoundCompletionGoldReward, false, DOTA_ModifyGold_Unspecified )
 			end
@@ -180,7 +160,7 @@ function CWintermaulGameRound:End()
 
 	local playerSummaryCount = 0
 	for i = 1, DOTA_MAX_TEAM_PLAYERS do
-		local nPlayerID = i-1
+		local nPlayerID = i - 1
 		if PlayerResource:HasSelectedHero( nPlayerID ) then
 			local szPlayerPrefix = string.format( "Player_%d_", playerSummaryCount)
 			playerSummaryCount = playerSummaryCount + 1
@@ -188,7 +168,6 @@ function CWintermaulGameRound:End()
 			roundEndSummary[ szPlayerPrefix .. "HeroName" ] = PlayerResource:GetSelectedHeroName( nPlayerID )
 			roundEndSummary[ szPlayerPrefix .. "CreepKills" ] = playerStats.nCreepsKilled
 			-- Have other tower stats here eg most valuable tower
-
 		end
 	end
 end
@@ -234,30 +213,22 @@ function CWintermaulGameRound:OnNPCSpawned( event )
 	if not spawnedUnit or spawnedUnit:IsPhantom() or spawnedUnit:GetClassname() == "npc_dota_thinker" or spawnedUnit:GetUnitName() == "" then
 		return
 	end
-
+    
 	if spawnedUnit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
 		spawnedUnit:SetMustReachEachGoalEntity(true)
+        self._nUnitsTotal = self._nUnitsTotal + 1
 		table.insert( self._vEnemiesRemaining, spawnedUnit )
 		spawnedUnit:SetDeathXP( 0 )
 		spawnedUnit.unitName = spawnedUnit:GetUnitName()
 		spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_phased", nil)
+        CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = #self._vEnemiesRemaining, totalenemies = self._nUnitsTotal})
 	end
 end
 
 --Units die in lane
 function CWintermaulGameRound:OnEntityKilled( event )
-	local killedUnit = EntIndexToHScript( event.entindex_killed )
-	if not killedUnit then
-		return
-	end
-
-	for i, unit in pairs( self._vEnemiesRemaining ) do
-		if killedUnit == unit then
-			table.remove( self._vEnemiesRemaining, i )
-			break
-		end
-	end	
-
+    self:OnEntityRemoved( event )
+    
 	local attackerUnit = EntIndexToHScript( event.entindex_attacker or -1 )
 	if attackerUnit then
 		-- Here we need some way of using the tower ID to update round
@@ -268,42 +239,23 @@ function CWintermaulGameRound:OnEntityKilled( event )
 			CustomGameEventManager:Send_ServerToAllClients("new_score", { id = playerID })
 		end
 	end
-    
-    self._nCoreUnitsRemaining = self._nCoreUnitsRemaining - 1
-	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", self._nCoreUnitsRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
 --Units reach the end
 function CWintermaulGameRound:OnEntityRemoved( event )
-
+    local removedUnit = event
+    if event.entindex_killed then 
+        removedUnit = EntIndexToHScript( event.entindex_killed )
+        if not removedUnit then
+            return
+        end
+    end
+    
 	for i, unit in pairs( self._vEnemiesRemaining ) do
-		if event == unit then
+		if removedUnit == unit then
 			table.remove( self._vEnemiesRemaining, i )
-			break
+            break
 		end
 	end
-    self._nCoreUnitsRemaining = self._nCoreUnitsRemaining - 1
-	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", self._nCoreUnitsRemaining), totalenemies = self._nCoreUnitsTotal})
+	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = #self._vEnemiesRemaining, totalenemies = self._nUnitsTotal})
 end
-
---[[
-Up for deletion?
-function CWintermaulGameRound:StatusReport( )
-	print( string.format( "Enemies remaining: %d", #self._vEnemiesRemaining ) )
-	for _,e in pairs( self._vEnemiesRemaining ) do
-		if e:IsNull() then
-			print( string.format( "<Unit %s Deleted from C++>", e.unitName ) )
-		else
-			print( e:GetUnitName() )
-		end
-	end
-	print( string.format( "Spawners: %d", #self._vSpawners ) )
-	for _,s in pairs( self._vSpawners ) do
-		s:StatusReport()
-	end
-end
-
-function CWintermaulGameRound:OnPlayerReconnect()
-	-- Do nothing.
-end
-]]
