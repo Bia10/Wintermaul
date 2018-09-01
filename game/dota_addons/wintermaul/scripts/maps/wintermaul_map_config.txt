@@ -166,7 +166,6 @@
 				"UnitsPerSpawn"				"1"
 				"SpawnInterval"				"1"
                 "SpawnWhenNextDies"         "true"
-                "RandomSpawning"            "true"
 			}
 		}
 
@@ -562,17 +561,31 @@
 			}
 		}
 
-		"Wave30" // Ancient Dragons
+		"Wave30" // Duke Wintermaul
 		{
 			"round_title"				"#DOTA_Wintermaul_Round_Duke_Wintermaul_Title"
 			"round_description"			"#DOTA_Wintermaul_Round_Duke_Wintermaul_Description"
 			"round_special"				"#DOTA_Wintermaul_Round_Element_Boss"
+			"GroupSpawners"             "true"
+			"SpawnAt"
+            {
+                "red_spawn_1"           "true"
+                "blue_spawn_1"          "true"
+                "teal_spawn_1"          "true"
+                "orange_spawn_1"        "true"
+                "yellow_spawn_1"        "true"
+                "purple_spawn_1"        "true"
+                "green_spawn_1"         "true"
+                "grey_spawn_1"          "true"
+                "pink_spawn_1"          "true"
+            }
 			"Duke Wintermaul"
 			{
 				"NPCName"					"npc_dota_wintermaul_duke_wintermaul"
-				"TotalUnitsToSpawn"			"1"
+				"TotalUnitsToSpawn"			"9"
 				"UnitsPerSpawn"				"1"
 				"SpawnInterval"				"1"
+				"SpawnWhenNextDies"         "true"
 			}
 		}
 	}
