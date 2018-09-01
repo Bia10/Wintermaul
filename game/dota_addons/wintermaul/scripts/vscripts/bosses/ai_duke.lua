@@ -3,8 +3,8 @@ function Spawn( entityKeyValues )
 	--math.randomseed(GameRules:GetGameTime())
 	EmitGlobalSound("Hero_Abaddon.BorrowedTime")
 
-	EmitGlobalSound("abad_respawn_" + tostring(math.random(1,10)))
-	thisEntity:SetContextThink( "DukeThink", DukeThink, 1 )
+	EmitGlobalSound("abaddon_abad_respawn_0" .. tostring(math.random(1,9)))
+	thisEntity:SetContextThink( "DukeThink", DukeThink, 10 )
 end
 
 function DukeThink()
