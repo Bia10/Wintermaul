@@ -1124,7 +1124,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"upgrade_to_nature_pool_2"			// Ability 1.
+		"Ability1"					"upgrade_to_terran_protector"			// Ability 1.
 		"Ability2"					"sell_building"			// Ability 2.
 		"Ability3"					"ability_tower"						// Ability 3.
 		"Ability4"					""						// Ability 4.

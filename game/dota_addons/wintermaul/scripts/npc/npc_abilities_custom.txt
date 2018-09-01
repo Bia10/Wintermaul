@@ -375,16 +375,13 @@
 			}
 		}
 	}
-	"upgrade_to_nature_pool_2"
+	"upgrade_to_terran_protector"
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityTextureName"		    "upgrade_to_nature_pool_2"
 		"MaxLevel" 						"1"
 	
-        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
-	
-		"AbilityGoldCost"				"%gold_cost"
-		"AbilityChannelTime"			"3"
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 	
 	
 		"AbilitySpecial"
@@ -396,6 +393,7 @@
 			}
 		}
         
+        "AbilityGoldCost"				"100"
 		"precache"
 		{
 			"particle"  "particles/radiant_fx2/good_ancient001_ambient_fallback_med.vpcf"
