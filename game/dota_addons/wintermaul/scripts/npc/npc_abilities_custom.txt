@@ -2052,4 +2052,77 @@
             }
         }
     }
+	"duke_spawn_minions"
+    {
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityTextureName"            "abaddon_borrowed_time"
+		"AbilityCastAnimation"          "ACT_DOTA_CAST_ABILITY_1"
+        "AbilitySpecial"
+        {
+            "01"
+            { 
+                "var_type"  "FIELD_FLOAT"
+                "channel_time" "0.5"
+            }
+			"02"
+            { 
+                "var_type"  "FIELD_INTEGER"
+                "unit_count" "5"
+            }       
+        }
+        "AbilityChannelTime"    "%channel_time"
+		"OnSpellStart"
+		{
+			"FireSound"
+			{
+				"EffectName"	"Hero_ElderTitan.EchoStomp.Channel"
+				"Target"
+				{
+					"Center"	"UNIT"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+				}
+			}
+		}
+        "OnChannelSucceeded"
+        {
+			"FireSound"
+            {
+                "EffectName"    "Hero_ElderTitan.EchoStomp"
+                "Target"
+				{
+					"Center"	"UNIT"
+					"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+				}
+            }
+			"FireEffect"
+            {
+                "Target"			"CASTER"
+                "EffectName"        "particles/units/heroes/hero_elder_titan/elder_titan_echo_stomp_physical.vpcf"
+				"EffectAttachType"	"follow_origin"
+            }
+			"SpawnUnit"
+			{
+				"UnitName"				"npc_dota_wintermaul_spider_fiend_b"
+				"UnitCount"				"%unit_count"
+				"SpawnRadius"			"25"
+				"GrantsGold"			"1"
+				"GrantsXP"				"1"
+				"OnSpawn"
+				{
+					"FireEffect"
+					{
+						"Target" "TARGET"
+						"EffectName" "particles/units/heroes/hero_life_stealer/life_stealer_infest_cast_mid.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectRadius" "100"
+						"EffectDurationScale" "1"
+						"EffectLifeDurationScale" "1"
+						"EffectColorA" "100 100 100"
+						"EffectColorB" "200 200 200"
+					}
+				}
+			}
+        }
+    }
 }
