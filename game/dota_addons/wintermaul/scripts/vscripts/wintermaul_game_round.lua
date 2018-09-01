@@ -13,34 +13,31 @@ function CWintermaulGameRound:ReadConfiguration( kv, gameMode, roundNumber )
 	self._szRoundQuestTitle = "#DOTA_Quest_Wintermaul_Round_Subtext"
 	self._szRoundTitle = kv.round_title or string.format( "Round%d", roundNumber )
 	self._szRoundElement = kv.round_special
-
+    
+    local spawnerNames = {}
+    for i = 1,#self._gameMode._vSpawnsList do
+        spawnerNames[self._gameMode._vSpawnsList[i].szSpawnerName] = true
+    end
+    self._vSpawnAt = kv.SpawnAt or spawnerNames
+    
 	self._vSpawners = {}
-	
+	self._bGroupSpawners = kv.GroupSpawners
+    
 	for k, v in pairs( kv ) do
 		if type( v ) == "table" and v.NPCName then
-			if v.SpawnerName or v.PossibleSpawns then
-				local spawner = CWintermaulGameSpawner()
-				spawner:ReadConfiguration( k, v, self )
-				self._vSpawners[k] = spawner
-			else
-				-- No spawner specified; create other spawners for each specified in map config.
-				local totalUnitsForWave = v.TotalUnitsToSpawn
-				local totalUnitsSpawned = 0
-				
-				local idealNumberOfUnitsToSpawn = math.ceil(v.TotalUnitsToSpawn/#self._gameMode._vSpawnsList)
-				for i = 1,#self._gameMode._vSpawnsList do
-					vv = self._gameMode._vSpawnsList[i]
-
-					v.TotalUnitsToSpawn = math.min(idealNumberOfUnitsToSpawn, totalUnitsForWave - totalUnitsSpawned)
-					v.SpawnerName = vv.szSpawnerName
-					
-					local spawner = CWintermaulGameSpawner()
-					spawner:ReadConfiguration( k, v, self )
-					self._vSpawners[vv.szSpawnerName] = spawner
-					
-					totalUnitsSpawned = totalUnitsSpawned + v.TotalUnitsToSpawn
-				end
-			end
+            local totalUnitsForWave = v.TotalUnitsToSpawn
+            local totalUnitsSpawned = 0
+            local idealNumberOfUnitsToSpawn = math.ceil(v.TotalUnitsToSpawn/#self._gameMode._vSpawnsList)
+            for spawnerName, bSpawn in pairs(self._vSpawnAt) do
+                if self._vSpawnAt[spawnerName] then
+                    v.TotalUnitsToSpawn = math.min(idealNumberOfUnitsToSpawn, totalUnitsForWave - totalUnitsSpawned)
+                    v.SpawnerName = spawnerName
+                    local spawner = CWintermaulGameSpawner()
+                    spawner:ReadConfiguration( k, v, self )
+                    self._vSpawners[spawnerName] = spawner
+                    totalUnitsSpawned = totalUnitsSpawned + v.TotalUnitsToSpawn
+                end
+            end
 		end
 	end
 
@@ -122,6 +119,7 @@ function CWintermaulGameRound:Begin()
 		spawner:Begin()
 		self._nCoreUnitsTotal = self._nCoreUnitsTotal + spawner:GetTotalUnitsToSpawn()
 	end
+    self._nCoreUnitsRemaining = self._nCoreUnitsTotal
 	self._nCoreUnitsKilled = 0
 
 	--DEPRECATED PROBABLY?
@@ -202,12 +200,21 @@ end
 
 
 function CWintermaulGameRound:Think()
-	for _, spawner in pairs( self._vSpawners ) do -- For each unit in a spawner
-		spawner:Think()
-	end
+    if self._bGroupSpawners then
+        for _, spawner in pairs( self._vSpawners ) do
+            --If any spawner has finished spawning
+            if not spawner:IsSpawningFinished() or spawner:AreThereSpawnedUnitsAlive() then
+                spawner:Think()
+                return
+            end
+        end
+    else
+        for _, spawner in pairs( self._vSpawners ) do
+            spawner:Think()
+        end
+    end
 end
 
--- is this used?
 function CWintermaulGameRound:IsFinished()
 	for _, spawner in pairs( self._vSpawners ) do
 		if not spawner:IsFinishedSpawning() then
@@ -263,11 +270,12 @@ function CWintermaulGameRound:OnEntityKilled( event )
 		local playerStats = self._vPlayerStats[ playerID ]
 		if playerStats then
 			playerStats.nCreepsKilled = playerStats.nCreepsKilled + 1
-			CustomGameEventManager:Send_ServerToAllClients("new_score", { id = playerID})
+			CustomGameEventManager:Send_ServerToAllClients("new_score", { id = playerID })
 		end
 	end
-
-	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", #self._vEnemiesRemaining), totalenemies = self._nCoreUnitsTotal})
+    
+    self._nCoreUnitsRemaining = self._nCoreUnitsRemaining - 1
+	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", self._nCoreUnitsRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
 --Units reach the end
@@ -279,7 +287,8 @@ function CWintermaulGameRound:OnEntityRemoved( event )
 			break
 		end
 	end
-	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", #self._vEnemiesRemaining), totalenemies = self._nCoreUnitsTotal})
+    self._nCoreUnitsRemaining = self._nCoreUnitsRemaining - 1
+	CustomNetTables:SetTableValue("game_state", "round_creep_data", {enemiesremaining = string.format( "%d", self._nCoreUnitsRemaining), totalenemies = self._nCoreUnitsTotal})
 end
 
 --[[

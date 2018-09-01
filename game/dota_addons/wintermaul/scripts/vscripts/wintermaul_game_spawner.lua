@@ -26,34 +26,14 @@ function CWintermaulGameSpawner:ReadConfiguration( name, kv, gameRound )
 	self._flChampionChance = tonumber( kv.ChampionChance or 0 )
 	self._flInitialWait = tonumber( kv.WaitForTime or 0 )
 	self._flSpawnInterval = tonumber( kv.SpawnInterval or 0 )
-
+    
 	self._bDontGiveGoal = ( tonumber( kv.DontGiveGoal or 0 ) ~= 0 )
 	self._bDontOffsetSpawn = ( tonumber( kv.DontOffsetSpawn or 0 ) ~= 0 )
-
-	if kv.PossibleSpawns ~= nil then
-		self:_LoadPossibleSpawns( kv.PossibleSpawns )
-	end
-
-end
-
-function CWintermaulGameSpawner:_LoadPossibleSpawns( kvSpawns )
-	vPossibleSpawnsNames = {}
-	self._vPossibleSpawns = {}
-	if type( kvSpawns ) == "table" then
-		local i
-		while true do
-			i = #vPossibleSpawnsNames + 1
-			if kvSpawns[string.format(i)] == nil then
-				break
-			end
-			table.insert(vPossibleSpawnsNames, kvSpawns[string.format(i)])
-		end
-	else
-		print("its not a table")
-	end
-	for k,v in pairs( vPossibleSpawnsNames ) do
-		table.insert(self._vPossibleSpawns, self:_SearchSpawnTable(v))
-	end
+    self._bSpawnWhenNextDies = ( tonumber( kv.SpawnWhenNextDies or 0 ) ~= 0 )
+    
+    self._vAliveSpawnedUnits = {}
+    
+    
 end
 
 function CWintermaulGameSpawner:_SearchSpawnTable( sSpawnName )
@@ -147,9 +127,18 @@ function CWintermaulGameSpawner:ParentSpawned( parentSpawner )
 	end
 end
 
+function CWintermaulGameSpawner:AreThereSpawnedUnitsAlive()
+    for k,v in pairs(self._vAliveSpawnedUnits) do
+        if v:IsNull() then
+            table.remove(self._vAliveSpawnedUnits, k)
+        end
+    end
+    return #self._vAliveSpawnedUnits > 0
+end
+
 
 function CWintermaulGameSpawner:Think()
-	if not self._flNextSpawnTime then
+	if not self._flNextSpawnTime or (self._bSpawnWhenNextDies and self:AreThereSpawnedUnitsAlive()) then
 		return
 	end
 
@@ -202,13 +191,12 @@ function CWintermaulGameSpawner:_UpdateSpawn( index )
 	self:_GetSpawnerInfoByIndex(index)
 end
 
+function CWintermaulGameSpawner:IsSpawningFinished()
+    return self._nTotalUnitsToSpawn == self._nUnitsSpawnedThisRound
+end
+
 function CWintermaulGameSpawner:_GetSpawnerInfoByIndex( index )
-	local spawnInfo
-	if self._vPossibleSpawns == nil then
-		spawnInfo = self._gameRound._gameMode._vSpawnsList[ index ]
-	else
-		spawnInfo = self._vPossibleSpawns[ index ]
-	end
+	local spawnInfo = self._gameRound._gameMode._vSpawnsList[ index ]
 	if spawnInfo == nil then
 		print( string.format( "Failed to get random spawn info for spawner %s.", self._szName ) )
 		return
@@ -274,7 +262,7 @@ function CWintermaulGameSpawner:_DoSpawn()
 		local vSpawnLocation = vBaseSpawnLocation
 
 		local entUnit = CreateUnitByName( szNPCClassToSpawn, vSpawnLocation, true, nil, nil, DOTA_TEAM_BADGUYS )
-
+        table.insert(self._vAliveSpawnedUnits, entUnit)
 		entUnit:SetMaxHealth(entUnit:GetMaxHealth() * self._gameRound._gameMode._diff["hp"])
 
 
