@@ -1,6 +1,8 @@
 require("wintermaul_game_round")
 function OnStartTouch(key)
-    killEntity(key.activator)
+    if not (key.activator:GetUnitName() == "npc_dota_defender_fort") then
+        killEntity(key.activator)
+    end
 end
 
 function killEntity(key)
