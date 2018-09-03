@@ -201,7 +201,7 @@ function CWintermaulGameMode:OnPlayerPicked( keys )
 	local player = EntIndexToHScript(keys.player)
 	for nPlayerID = 0, DOTA_MAX_PLAYERS-1 do
 		if nPlayerID == 0 then
-			PlayerResource:SetGold(nPlayerID, 150, false)
+			PlayerResource:SetGold(nPlayerID, 100, false) --set a different player1 starting gold here if needed 
 		else
 			PlayerResource:SetGold(nPlayerID, 100, false)
 		end
