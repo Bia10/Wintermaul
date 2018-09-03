@@ -26,16 +26,15 @@ function ScoreUpdate() {
         })
     }
 
-    player_stats.sort(function (obj1, obj2) {
-        // Descending: second age less than the first
-        return obj2.score - obj1.score;
-    });
-    
     for (var key in player_stats) {
         player = player_stats[key]
         $("#" + player.id).FindChildTraverse('PlayerName').text = player.name;
+        $("#" + player.id).FindChildTraverse('PlayerName').style.color = GameUI.CustomUIConfig().player_colors[ player.id ];
         $("#" + player.id).FindChildTraverse('PlayerKills').text = player.score;
     }
+
+    player_stats.sort(function (obj1, obj2) {return obj2.score - obj1.score;});
+    //we might have to reload the entire list, dont know if we can just rearrange items
 }
 
 var clicked = false
