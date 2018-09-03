@@ -558,12 +558,13 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/items/wards/eyeofforesight/eyeofforesight.vmdl"// Model.
+		"Model"						"models/items/crystal_maiden/ward_staff/ward_staff_crystal.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"HasInventory"				"1"
 		"Level"						"1"
+		"ModelScale"				"1.3"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -649,12 +650,12 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/particle/sphere.vmdl"// Model.
+		"Model"						"models/items/wards/frozen_formation/frozen_formation.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
-		"ModelScale"				"10"
+		"ModelScale"				"1"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -742,7 +743,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/particle/lion_attack_sphere.vmdl"// Model.
+		"Model"						"models/items/wards/lich_black_pool_watcher/lich_black_pool_watcher.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
@@ -833,12 +834,12 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/items/crystal_maiden/ward_staff/ward_staff_crystal.vmdl"// Model.
+		"Model"						"models/items/wards/eyeofforesight/eyeofforesight.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
-		"ModelScale"				"8"
+		"ModelScale"				"1.5"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -924,12 +925,12 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/heroes/oracle/crystal_ball.vmdl"// Model.
+		"Model"						"models/items/wards/crystal_maiden_ward/crystal_maiden_ward.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
-		"ModelScale"				"3.2"
+		"ModelScale"				"1.5"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -1124,9 +1125,9 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"upgrade_to_terran_protector"			// Ability 1.
-		"Ability2"					"sell_building"			// Ability 2.
-		"Ability3"					"ability_tower"						// Ability 3.
+		"Ability1"					"sell_building"			// Ability 1. upgrade_to_terran_protector
+		"Ability2"					"ability_tower"			// Ability 2.
+		"Ability3"					""						// Ability 3.
 		"Ability4"					""						// Ability 4.
 		"Ability5"					""						// Ability 5.
 		"Ability6"					""						// Ability 6 - Extra.
@@ -1141,8 +1142,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"3"			// Damage range min.
-		"AttackDamageMax"			"6"			// Damage range max.
+		"AttackDamageMin"			"8"			// Damage range min.
+		"AttackDamageMax"			"12"			// Damage range max.
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"1"			// Speed of attack.
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
@@ -1238,7 +1239,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked. 
-		"ProjectileModel"			"particles/units/heroes/hero_rattletrap/rattletrap_rocket_flare.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/units/heroes/hero_lone_druid/lone_druid_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1000"		// Speed of projectile..
 		"AttacksEnabled"			"ground,air"
 
@@ -1401,7 +1402,7 @@
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
-		"ModelScale"				"1.5"
+		"ModelScale"				"1.3"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -1582,12 +1583,12 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/props_tree/tree_pine_03b_sfm.vmdl"// Model.
+		"Model"						"models/heroes/treant_protector/treant_protector.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
-		"ModelScale"				"1.5"
+		"ModelScale"				"1.1"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -1665,6 +1666,16 @@
 		// Size
 		"ConstructionSize"		"2"
 		"BlockPathingSize"		"2"
+		"creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable2" { "ItemDef" "227" }
+				"Wearable3" { "ItemDef" "228" }
+				"Wearable4"	{ "ItemDef" "229" }
+				"Wearable5" { "ItemDef" "230" }
+			}
+		}
 	}
 
 	//==========================================================
@@ -1677,7 +1688,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/buildings/building_plain_reference.mdl"// Model.
+		"Model"						"models/items/wards/alliance_ward/alliance_ward.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
@@ -1709,7 +1720,7 @@
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"			"5"		// Damage range min.
-		"AttackDamageMax"			"5"		// Damage range max.
+		"AttackDamageMax"			"8"		// Damage range max.
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"0.5"			// Speed of attack.
 		"AttackAnimationPoint"		"0.2"		// Normalized time in animation cycle to attack.
@@ -1768,12 +1779,12 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/buildings/building_racks_melee_reference.mdl"// Model.
+		"Model"						"models/items/wards/chen_ward/chen_ward.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
-		"ModelScale"				"0.5"
+		"ModelScale"				"1"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -1860,12 +1871,12 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_creature"	// Class of entity of link to.
-		"Model"						"models/buildings/building_racks_ranged_reference.mdl"// Model.
+		"Model"						"models/items/wards/celestial_observatory/celestial_observatory.vmdl"// Model.
 		//"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
-		"ModelScale"				"0.5"
+		"ModelScale"				"1.3"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -1957,6 +1968,7 @@
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
+		"ModelScale"				"1.3"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -2189,6 +2201,7 @@
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"200"
 		"Level"						"1"
+		"ModelScale"				"1.3"
 		"PedestalModel"             "models/props_teams/logo_dire_winter_small.vmdl"
 		"PedestalOffset"            "0"
 		"PedestalModelScale"        "1"
@@ -3246,7 +3259,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"20010"		// Base health.
+		"StatusHealth"				"13355"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3330,7 +3343,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"25962"		// Base health.
+		"StatusHealth"				"17322"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3407,7 +3420,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"32994"		// Base health.
+		"StatusHealth"				"22009"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3484,7 +3497,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"41196"		// Base health.
+		"StatusHealth"				"27476"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3560,7 +3573,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"41196"		// Base health.
+		"StatusHealth"				"27476"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3637,7 +3650,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"50658"		// Base health.
+		"StatusHealth"				"33783"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3714,7 +3727,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"61470"		// Base health.
+		"StatusHealth"				"40990"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3799,7 +3812,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"73722"		// Base health.
+		"StatusHealth"				"49157"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3876,7 +3889,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"87504"		// Base health.
+		"StatusHealth"				"58344"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -3961,7 +3974,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"102906"		// Base health.
+		"StatusHealth"				"68611"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4044,7 +4057,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"120018"		// Base health.
+		"StatusHealth"				"80018"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4128,7 +4141,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"231540"		// Base health.
+		"StatusHealth"				"185235"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4212,7 +4225,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"231540"		// Base health.
+		"StatusHealth"				"185235"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4297,7 +4310,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"266212"		// Base health.
+		"StatusHealth"				"212972"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4375,7 +4388,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"304184"		// Base health.
+		"StatusHealth"				"243349"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4460,7 +4473,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"345606"		// Base health.
+		"StatusHealth"				"276486"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4537,7 +4550,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"390628"		// Base health.
+		"StatusHealth"				"312503"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4616,7 +4629,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"439400"		// Base health.
+		"StatusHealth"				"351520"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4702,7 +4715,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"492072"		// Base health.
+		"StatusHealth"				"393657"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4788,7 +4801,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"548794"		// Base health.
+		"StatusHealth"				"439034"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4864,7 +4877,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"548794"		// Base health.
+		"StatusHealth"				"439034"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -4941,7 +4954,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"609716"		// Base health.
+		"StatusHealth"				"487771"		// Base health.
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -5021,7 +5034,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"674988"		// Base health. 17877 old value
+		"StatusHealth"				"539988"		// Base health. 
 		"StatusMana"				"100"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		

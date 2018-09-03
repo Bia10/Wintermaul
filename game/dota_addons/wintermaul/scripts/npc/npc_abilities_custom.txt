@@ -506,7 +506,7 @@
 	
 		"UnitName"						"gaias_box"
 		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"100"
+		"AbilityGoldCost"				"120"
 		
 		"AbilitySpecial"
 		{
@@ -1123,7 +1123,7 @@
 	
 		"UnitName"						"chain_lightning_caster"
 		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"100"
+		"AbilityGoldCost"				"150"
 		
 		"AbilitySpecial"
 		{
@@ -1333,7 +1333,7 @@
 			"02"
 	        {
 	        	"var_type"					"FIELD_INTEGER"
-	        	"dmg_percent"				"50"
+	        	"dmg_percent"				"25"
 	        }
 	    }
 		
