@@ -1,8 +1,10 @@
+var locations = [];
 function InitScoreboard() {
     var player_ids = Game.GetAllPlayerIDs();
     
     for (var i = 0; i < player_ids.length; i++) {
-        ScoreAdd(player_ids[i])
+        ScoreAdd(player_ids[i]);
+        locations.push(player_ids[i]);
     }
     ScoreUpdate()
 }
@@ -25,16 +27,24 @@ function ScoreUpdate() {
             score: Players.GetLastHits(int_player_id)
         })
     }
-
+    player_stats.sort(function (obj1, obj2) {return obj2.score - obj1.score;});
+    var i = 0; //4-am coding please rework when "sober"
     for (var key in player_stats) {
         player = player_stats[key]
         $("#" + player.id).FindChildTraverse('PlayerName').text = player.name;
         $("#" + player.id).FindChildTraverse('PlayerName').style.color = GameUI.CustomUIConfig().player_colors[ player.id ];
         $("#" + player.id).FindChildTraverse('PlayerKills').text = player.score;
+        ReorderPlayer(player.id, i);
+        i++;
     }
+}
 
-    player_stats.sort(function (obj1, obj2) {return obj2.score - obj1.score;});
-    //we might have to reload the entire list, dont know if we can just rearrange items
+function ReorderPlayer(playerId, playerOldId)
+{
+    if ( locations[playerOldId] != playerId)
+    {
+        $('#ScoreBoard').MoveChildBefore( $("#" + playerId), $("#" + playerOldId) );
+    }
 }
 
 var clicked = false
