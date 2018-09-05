@@ -1,5 +1,16 @@
 
 DEBUG_SPEW = 0
+player_colors = {}
+player_colors[1] = { 61, 210, 150 }    --              Teal
+player_colors[3] = { 243, 201, 9 }     --              Yellow
+player_colors[5] = { 197, 77, 168 }    --              Pink
+player_colors[4] = { 255, 108, 0 }     --              Orange
+player_colors[0] = { 52, 85, 255 }     --              Blue
+player_colors[8] = { 101, 212, 19 }    --              Green
+player_colors[9] = { 129, 83, 54 }     --              Brown
+player_colors[7] = { 27, 192, 216 }    --              Cyan
+player_colors[6] = { 199, 228, 13 }    --              Olive
+player_colors[2] = { 140, 42, 244 }    --              Purple
 
 
 require('mechanics/attacks')
@@ -31,7 +42,7 @@ function CWintermaulGameMode:InitGameMode()
 	GameRules:SetCreepMinimapIconScale( 0.7 )
 	GameRules:SetRuneMinimapIconScale( 0.7 )
 	GameRules:SetGoldPerTick( 0 )
-	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_GOODGUYS,9)
+	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_GOODGUYS,10)
 	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS,0)
 	GameRules:GetGameModeEntity():SetRemoveIllusionsOnDeath( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesOverride( true )
@@ -197,13 +208,14 @@ end
 
 -- sets ability points to 0 and sets skills to lvl1 at start.
 function CWintermaulGameMode:OnPlayerPicked( keys )
-
-	local player = EntIndexToHScript(keys.player)
-	for nPlayerID = 0, DOTA_MAX_PLAYERS-1 do
-		if nPlayerID == 0 then
-			PlayerResource:SetGold(nPlayerID, 100, false) --set a different player1 starting gold here if needed 
-		else
-			PlayerResource:SetGold(nPlayerID, 100, false)
+	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+		if PlayerResource:IsValidTeamPlayer(nPlayerID) then
+			PlayerResource:SetCustomPlayerColor(nPlayerID, player_colors[nPlayerID][1], player_colors[nPlayerID][2], player_colors[nPlayerID][3])
+			if nPlayerID == 0 then
+				PlayerResource:SetGold(nPlayerID, 100, false) --set a different player1 starting gold here if needed 
+			else
+				PlayerResource:SetGold(nPlayerID, 100, false)
+			end
 		end
 	end
 end
