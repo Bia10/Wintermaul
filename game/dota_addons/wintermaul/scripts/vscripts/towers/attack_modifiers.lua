@@ -35,7 +35,7 @@ function modifier_autoattack:OnIntervalThink()
     
     -- Disabled autoattack state
     if unit.disable_autoattack == 1 then
-        local enemies = FindUnitsInRadius( DOTA_TEAM_BADGUYS, unit:GetOrigin(), nil, unit:GetAttackRange(), DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
+        local enemies = FindUnitsInRadius( DOTA_TEAM_BADGUYS, unit:GetOrigin(), nil, unit:Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
         if #enemies > 0 then
             -- If an enemy is valid, attack it and stop the thinker
             for _,enemy in pairs(enemies) do
