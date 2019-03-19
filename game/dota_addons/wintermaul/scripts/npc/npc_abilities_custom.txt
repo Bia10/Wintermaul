@@ -1439,13 +1439,6 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
         
-        "OnAttackLanded"
-        {
-            "ApplyModifier"
-            {
-            }
-        }
-        
         "Modifiers"
         {
             "slowing_attacks"
@@ -1457,11 +1450,7 @@
                     "ApplyModifier"
                     {
                         "ModifierName"  "cold_slow"
-                        "Target"
-                        {
-                            "Center"    "TARGET"
-                            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-                        }
+                        "Target"        "TARGET"
                     }
                 }    
                 
