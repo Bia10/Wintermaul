@@ -1436,29 +1436,62 @@
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"venomancer_poison_sting"													// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-
+        
+        "OnAttackLanded"
+        {
+            "ApplyModifier"
+            {
+            }
+        }
+        
+        "Modifiers"
+        {
+            "slowing_attacks"
+            {
+                "Passive" "1"   
+                "IsHidden"  "1"
+				"OnAttackLanded"
+                {
+                    "ApplyModifier"
+                    {
+                        "ModifierName"  "cold_slow"
+                        "Target"
+                        {
+                            "Center"    "TARGET"
+                            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                        }
+                    }
+                }    
+                
+            }
+            "cold_slow"
+            {
+                "IsDebuff" "1"
+                "Duration" "%duration"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movespeed_reduction_percentage" 
+                }
+            }
+            
+        }
+        
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
 			"01"
 			{
-				"var_type"				"FIELD_FLOAT"
-				"duration"				"4.0"
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"4"
 			}
-			"02"
-			{
+            "02"
+            {
 				"var_type"					"FIELD_INTEGER"
-				"damage"					"5"
-			}
-			"03"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"movement_speed"			"-30"
-			}
+				"movespeed_reduction_percentage"			"-10"
+            }
 		}
 	}
 
