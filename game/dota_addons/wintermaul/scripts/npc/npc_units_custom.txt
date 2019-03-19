@@ -943,7 +943,7 @@
 		"Ability1"					"sell_building"			// Ability 1.
 		"Ability2"					"splash_damage"		// Ability 2.
 		"Ability3"					"ability_tower"			// Ability 3.
-		"Ability4"					""			// Ability 4.
+		"Ability4"					"tower_aoe_slow"			// Ability 4.
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.

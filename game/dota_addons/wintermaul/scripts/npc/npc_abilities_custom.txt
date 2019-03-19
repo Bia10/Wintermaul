@@ -1484,6 +1484,74 @@
 		}
 	}
 
+    "tower_aoe_slow"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        
+        "Modifiers"
+        {
+            "aoe_slowing_attacks"
+            {
+                "Passive" "1"   
+                "IsHidden"  "1"
+				"OnAttackLanded"
+                {
+                    "ActOnTargets"
+                    {
+                        "Target"
+                        {
+                            "Center"    "TARGET"
+                            "Radius"    "%aoe_radius"
+                            "Teams"     "DOTA_UNIT_TARGET_TEAM_BOTH"
+                        }
+                        "Action"
+                        {
+                            "ApplyModifier"
+                            {
+                                "ModifierName"  "aoe_cold_slow"
+                                "Target"        "TARGET"
+                            }
+                        }
+                    }
+                }
+            }
+            "aoe_cold_slow"
+            {
+                "IsDebuff" "1"
+                "Duration" "%duration"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movespeed_reduction_percentage" 
+                }
+                "StatusEffectName"     "particles/status_fx/status_effect_iceblast.vpcf"
+                
+            }
+        }
+        
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"1"
+			}
+            "02"
+            {
+				"var_type"					"FIELD_INTEGER"
+				"movespeed_reduction_percentage"			"-50"
+            }
+            "03"
+            {
+				"var_type"					"FIELD_INTEGER"
+				"aoe_radius"			    "100"
+            }
+		}
+	}
 	
 	"tower_chain_lightning"
 	{
